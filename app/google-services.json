@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "232497710602",
+    "firebase_url": "https://couch-potato-87a31.firebaseio.com",
+    "project_id": "couch-potato-87a31",
+    "storage_bucket": "couch-potato-87a31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232497710602:android:368c7291c3a3280ca501f3",
+        "android_client_info": {
+          "package_name": "com.example.couchpotato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232497710602-8ih5kqkq6smr4ktpfc2lubrqk99cg0t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoyaS3Hhsk6TmX4Pc3KYdK7xXQJgIOBW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232497710602-8ih5kqkq6smr4ktpfc2lubrqk99cg0t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
