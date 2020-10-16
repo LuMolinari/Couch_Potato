@@ -8,5 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:buttonCornerRadius">25dp</item>
+        <item name="textAllCaps">false</item>
     </style>
 </resources>
