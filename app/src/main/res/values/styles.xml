@@ -1,10 +1,17 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:editTextColor">@color/textFieldBackground</item>
+    </style>
+
+    <style name="Button.Colored" parent="ThemeOverlay.AppCompat" >
+     <item name="colorAccent">#87C6AF</item>
     </style>
 
 </resources>
