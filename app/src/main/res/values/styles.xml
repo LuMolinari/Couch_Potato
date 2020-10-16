@@ -15,4 +15,9 @@
      <item name="colorAccent">#87C6AF</item>
     </style>
 
+    <!-- Splash screen -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
 </resources>
