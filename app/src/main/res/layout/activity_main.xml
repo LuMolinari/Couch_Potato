@@ -45,6 +45,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:paddingStart="25dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingEnd="25dp"
         android:id="@+id/button2"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
@@ -68,6 +72,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:background="@drawable/text_input_bubble"
         android:id="@+id/editTextTextPassword4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,7 +80,7 @@
         android:ems="10"
         android:autofillHints="@string/password"
         android:inputType="textPassword"
-        android:textColorHint="#E5E5E5"
+        android:textColorHint="#859193"
         android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -84,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
     <EditText
+        android:background="@drawable/text_input_bubble"
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +97,7 @@
         android:ems="10"
         android:autofillHints="@string/email"
         android:inputType="textEmailAddress"
-        android:textColorHint="#E5E5E5"
+        android:textColorHint="#859193"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword4"
