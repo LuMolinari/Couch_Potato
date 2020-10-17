@@ -7,8 +7,11 @@
     <string name="email">Email</string>
     <string name="logo">logo</string>
     <string name="sign_up">Sign Up</string>
-    <string name="already_have_an_account_login_here">Already Have An Account? Login Here</string>
+    <string name="already_have_an_account_login_here"><u>Already Have An Account? Login Here</u></string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email_address">Email Address</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="discover">Discover</string>
+    <string name="account">Account</string>
 </resources>
