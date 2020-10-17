@@ -60,6 +60,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
         android:id="@+id/editTextTextPersonName"
@@ -77,6 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
     <EditText
+        android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
         android:id="@+id/editTextTextPersonName2"
@@ -94,6 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"/>
 
     <EditText
+        android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
         android:id="@+id/editTextTextEmailAddress2"
@@ -111,6 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
     <EditText
+        android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
         android:id="@+id/editTextTextPassword2"
