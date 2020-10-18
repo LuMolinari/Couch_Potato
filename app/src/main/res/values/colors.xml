@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#12221E</color>
     <color name="colorAccent">#87C6AF</color>
     <color name="textFieldBackground">#36535C</color>
+    <color name="hintTextColor">#859193</color>
+    <color name="whiteText">#E5E5E5</color>
 </resources>

@@ -16,4 +16,5 @@
     <string name="account">Account</string>
     <string name="tap_to_select_streaming_services">Tap to select the streaming services you are subscribed to.</string>
     <string name="streaming_subscriptions">Streaming Subscriptions</string>
+
 </resources>
