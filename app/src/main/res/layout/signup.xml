@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.Button.Colored"
@@ -44,13 +44,13 @@
         android:paddingRight="25dp"
         android:paddingEnd="25dp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/linkToLoginTextview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/linkToLoginTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -63,7 +63,7 @@
         android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/signUpFirstNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/first_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toTopOf="@+id/signUpLastNameField"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
@@ -81,7 +81,7 @@
         android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/signUpLastNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -91,15 +91,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/last_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress2"
+        app:layout_constraintBottom_toTopOf="@+id/signUpEmailAddressField"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"/>
+        app:layout_constraintTop_toBottomOf="@+id/signUpFirstNameField"/>
 
     <EditText
         android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/signUpEmailAddressField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -108,16 +108,16 @@
         android:inputType="textEmailAddress"
         android:hint="@string/email_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+        app:layout_constraintBottom_toTopOf="@+id/signUpPasswordField"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpLastNameField" />
 
     <EditText
         android:textColor="@color/whiteText"
         android:textColorHint="@color/hintTextColor"
         android:backgroundTint="@color/hintTextColor"
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/signUpPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -129,7 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpEmailAddressField" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

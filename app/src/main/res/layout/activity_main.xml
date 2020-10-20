@@ -49,19 +49,19 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:paddingEnd="25dp"
-        android:id="@+id/button2"
+        android:id="@+id/signInButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/linkToSignUpTextview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/linkToSignUpTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -73,7 +73,7 @@
 
     <EditText
         android:background="@drawable/text_input_bubble"
-        android:id="@+id/editTextTextPassword4"
+        android:id="@+id/signInPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -87,11 +87,11 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/signInEmailField" />
 
     <EditText
         android:background="@drawable/text_input_bubble"
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/signInEmailField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -102,7 +102,7 @@
         android:textColorHint="@color/hintTextColor"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword4"
+        app:layout_constraintBottom_toTopOf="@+id/signInPasswordField"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
