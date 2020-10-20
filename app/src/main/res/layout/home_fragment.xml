@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/accountsImageButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
@@ -38,6 +38,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <ScrollView
+        android:id="@+id/discoverScrollview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"

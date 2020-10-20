@@ -37,6 +37,7 @@ public class nav_bar_layout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.nav_bar_layout);
 
         BottomNavigationView bottomNavigationMenu = findViewById(R.id.bottomNav);
         bottomNavigationMenu.setOnNavigationItemSelectedListener(navListener);
