@@ -53,4 +53,8 @@ public class FirebaseAuthenticationManager {
         });
     }
 
+    // added method to get user id for database document path
+    public String getCurrentUserId(){
+        return mAuth.getCurrentUser().getUid();
+    }
 }
