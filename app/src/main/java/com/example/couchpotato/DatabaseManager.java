@@ -168,10 +168,7 @@ public class DatabaseManager {
         });
     }
 
-
-
     public void createDocument(String collectionPath, String documentPath, String firstFieldKey, Object fieldValue) {
-        // ADDED WHICH COLLECTION TO ADD DOCUMENT TO
         DocumentReference documentReference = db.collection(collectionPath).document(documentPath);
 
         HashMap<String, Object> data = new HashMap<>();
@@ -277,7 +274,6 @@ public class DatabaseManager {
     }
 
     public void createNewField(String collectionPath, String documentPath, String fieldKey, Object fieldValue) {
-        // ADDED COLLECTION
         DocumentReference documentReference = db.collection(collectionPath).document(documentPath);
         HashMap<String, Object> data = new HashMap<>();
         data.put(fieldKey, fieldValue);
