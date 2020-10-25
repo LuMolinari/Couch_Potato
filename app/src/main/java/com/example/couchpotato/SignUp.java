@@ -22,6 +22,7 @@ public class SignUp extends Activity implements View.OnClickListener {
     private EditText emailField;
     private EditText passwordField;
     private TextView linkToLoginTextview;
+    private DatabaseManager databaseManager = new DatabaseManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +85,10 @@ public class SignUp extends Activity implements View.OnClickListener {
                     sign up was successful. Write below this comment
                     whatever you want the app to do when sign up is successful
                      */
+                    String userId = firebaseAuthenticationManager.getCurrentUserId();
+                    databaseManager.createDocument("users", userId, "First Name", firstNameField.getText().toString());
+                    databaseManager.createNewField("users", userId, "Last Name", lastNameField.getText().toString());
+                    databaseManager.createNewField("users", userId, "Email", emailField.getText().toString());
                     Toast.makeText(SignUp.this, "Sign up Successful", Toast.LENGTH_SHORT).show();
                     openHomeFragmentPage();
                 }
