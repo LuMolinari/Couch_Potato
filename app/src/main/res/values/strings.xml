@@ -17,5 +17,13 @@
     <string name="tap_to_select_streaming_services">Tap to select the streaming services you are subscribed to.</string>
     <string name="streaming_subscriptions">Streaming Subscriptions</string>
     <string name="hint_search">Search...</string>
+    <string name="favorites">Favorites</string>
+    <string name="my_account">My Account</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="recommend">Recommend</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password...</string>
+    <string name="new_name">New Name...</string>
+    <string name="edit_name">Edit Name</string>
 
 </resources>

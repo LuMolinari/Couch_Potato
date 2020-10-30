@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+
+    <TextView
+        android:id="@+id/myAccountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_account"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10123119" />
+
+    <Button
+        android:id="@+id/favorites_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_baseline_live_tv_24"
+        android:drawableLeft="@drawable/ic_baseline_live_tv_24"
+        android:ems="7"
+        android:gravity="center"
+        android:text="@string/streaming_subscriptions"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/favorites_button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myAccountTextView" />
+
+    <Button
+        android:id="@+id/favorites_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_baseline_settings_24"
+        android:drawableLeft="@drawable/ic_baseline_settings_24"
+
+        android:ems="7"
+        android:gravity="center"
+        android:text="@string/account_settings"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_button3" />
+
+    <Button
+        android:id="@+id/favorites_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_baseline_favorite_24"
+        android:drawableLeft="@drawable/ic_baseline_favorite_24"
+
+        android:ems="7"
+        android:gravity="center"
+        android:text="@string/favorites"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/favorites_button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_button2" />
+
+    <Button
+        android:id="@+id/favorites_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableStart="@drawable/ic_baseline_share_24"
+        android:drawableLeft="@drawable/ic_baseline_favorite_24"
+        android:ems="7"
+        android:gravity="center"
+        android:text="@string/recommend"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/favorites_button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
