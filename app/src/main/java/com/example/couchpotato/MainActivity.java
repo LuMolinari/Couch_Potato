@@ -1,17 +1,33 @@
 package com.example.couchpotato;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-    FirebaseAuthenticationManager firebaseAuthenticationManager;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private FirebaseAuthenticationManager firebaseAuthenticationManager;
+    private Button signInButton;
+    private EditText signInEmailField;
+    private EditText signInPasswordField;
+    private TextView linkToSingUpTextView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         firebaseAuthenticationManager = new FirebaseAuthenticationManager();
+        signInButton = findViewById(R.id.signInButton);
+        signInButton.setOnClickListener(this);
 
+        signInEmailField = findViewById(R.id.signInEmailField);
+        signInPasswordField = findViewById(R.id.signInPasswordField);
         //The example used to display api functionality
 
 //        TraktV2 trakt = new TraktV2("d07305deec2882a4e7b2bdafba909ed07cc94b00ffd82bf1919f67526dd550c5");
@@ -40,40 +56,34 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
+        linkToSingUpTextView = findViewById(R.id.linkToSignUpTextview);
+        linkToSingUpTextView.setOnClickListener(this);
     }
 
-    public void signUpUser(String email, String password) {
-        firebaseAuthenticationManager.signUpUser(email, password, new FirebaseCallback() {
-            @Override
-            public void callBack(Object status) {
-                if (status.equals(null)) {
-                    /*
-                    sing up failed:
-                        could be because the user already linked to another
-                        could be because the email provided was badly formatted (invalid email)
-                        could be because the password was less than 6 characters
-
-                     let me know if you wan me to specify the reasons
-                     Write below this comment whatever you want the app to do
-                     when signing up fails
-                     */
-
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.signInButton:
+                if (signInEmailField.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
+                } else if (signInPasswordField.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                 } else {
-                    /*
-                    sign up was successful. Write below this comment
-                    whatever you want the app to do when sign up is successful
-                     */
-
+                    signInUser(signInEmailField.getText().toString(), signInPasswordField.getText().toString());
                 }
-            }
-        });
+
+                break;
+            case R.id.linkToSignUpTextview:
+                openSignUpPage();
+                break;
+
+        }
     }
 
     public void signInUser(String email, String password) {
         firebaseAuthenticationManager.singInUser(email, password, new FirebaseCallback() {
             @Override
             public void callBack(Object status) {
-                if (status.equals(null)) {
+                if (status == null) {
                     /*
                     sign in failed:
                         could be because the account doesn't exists
@@ -84,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                      when log in fails
                      //TODO I think we could have a toast come up saying account not found, retry or signup
                      */
+                    Toast.makeText(MainActivity.this, "Invalid email/password", Toast.LENGTH_SHORT).show();
 
                 } else {
                     /*
@@ -93,10 +104,23 @@ public class MainActivity extends AppCompatActivity {
                      when log in is successful
                      //todo from here we open up the main discover window filled with generally popular movies. i know trakt shows trending shows or movies
                      */
-
+                    Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
+                    openHomeFragmentPage();
                 }
             }
         });
+    }
+
+    public void openHomeFragmentPage() {
+        Intent intent = new Intent(this, HomeFragmentPage.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void openSignUpPage() {
+        Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+        finish();
     }
 
 }

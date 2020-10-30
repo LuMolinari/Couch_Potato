@@ -52,5 +52,8 @@ public class FirebaseAuthenticationManager {
             }
         });
     }
-
+    
+    public String getCurrentUserId(){
+        return mAuth.getCurrentUser().getUid();
+    }
 }
