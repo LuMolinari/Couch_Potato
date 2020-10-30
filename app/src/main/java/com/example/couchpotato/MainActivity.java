@@ -91,9 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      let me know if you wan me to specify the reasons
                      Write below this comment whatever you want the app to do
                      when log in fails
-                     //TODO I think we could have a toast come up saying account not found, retry or signup
                      */
-                    Toast.makeText(MainActivity.this, "Invalid email/password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
 
                 } else {
                     /*
@@ -101,9 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     Write below this comment whatever you want the app to do
                      when log in is successful
-                     //todo from here we open up the main discover window filled with generally popular movies. i know trakt shows trending shows or movies
                      */
-                    Toast.makeText(MainActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Log In Successful", Toast.LENGTH_SHORT).show();
                     openHomeFragmentPage();
                 }
             }
