@@ -1,5 +1,7 @@
 package com.example.couchpotato;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -11,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class nav_bar_layout extends AppCompatActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -41,6 +43,8 @@ public class nav_bar_layout extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationMenu = findViewById(R.id.bottomNav);
         bottomNavigationMenu.setOnNavigationItemSelectedListener(navListener);
+        bottomNavigationMenu.setItemTextColor(ColorStateList.valueOf(Color.parseColor("#000000")));
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
 
