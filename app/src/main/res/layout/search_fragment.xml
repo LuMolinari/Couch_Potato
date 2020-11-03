@@ -6,20 +6,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
     <EditText
-        android:background="@drawable/text_input_bubble"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColorHint="@color/hintTextColor"
         android:id="@+id/searchField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/text_input_bubble"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:ems="15"
         android:hint="@string/hint_search"
         android:inputType="textPersonName"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/hintTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,11 +37,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchField">
+        app:layout_constraintTop_toTopOf="@+id/guideline10">
 
         <LinearLayout
             android:layout_width="match_parent"

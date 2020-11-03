@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openHomeFragmentPage() {
-        Intent intent = new Intent(this, HomeFragmentPage.class);
+        Intent intent = new Intent(this, nav_bar_layout.class);
         startActivity(intent);
         finish();
     }

@@ -25,7 +25,7 @@
         app:layout_constraintGuide_percent="0.10123119" />
 
     <Button
-        android:id="@+id/favorites_button"
+        android:id="@+id/subscriptions_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -37,13 +37,13 @@
         android:gravity="center"
         android:text="@string/streaming_subscriptions"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/favorites_button2"
+        app:layout_constraintBottom_toTopOf="@+id/recommend_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myAccountTextView" />
 
     <Button
-        android:id="@+id/favorites_button4"
+        android:id="@+id/account_settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -58,10 +58,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button3" />
+        app:layout_constraintTop_toBottomOf="@+id/favorites_button" />
 
     <Button
-        android:id="@+id/favorites_button3"
+        android:id="@+id/favorites_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -73,13 +73,13 @@
         android:gravity="center"
         android:text="@string/favorites"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/favorites_button4"
+        app:layout_constraintBottom_toTopOf="@+id/account_settings_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button2" />
+        app:layout_constraintTop_toBottomOf="@+id/recommend_button" />
 
     <Button
-        android:id="@+id/favorites_button2"
+        android:id="@+id/recommend_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -91,9 +91,9 @@
         android:gravity="center"
         android:text="@string/recommend"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/favorites_button3"
+        app:layout_constraintBottom_toTopOf="@+id/favorites_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button" />
+        app:layout_constraintTop_toBottomOf="@+id/subscriptions_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

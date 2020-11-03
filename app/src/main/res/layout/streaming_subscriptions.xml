@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
     <TextView
         android:id="@+id/account_heading"
         android:layout_width="wrap_content"
@@ -14,6 +21,7 @@
         android:fontFamily="@font/lato"
         android:text="@string/my_account"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,38 +30,37 @@
         android:id="@+id/streaming_subscriptions_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:fontFamily="@font/lato"
         android:text="@string/streaming_subscriptions"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.598"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_heading" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <ImageView
         android:id="@+id/live_tv_icon"
         android:layout_width="30dip"
         android:layout_height="30dip"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/ic_live_tv"
         app:layout_constraintEnd_toStartOf="@+id/streaming_subscriptions_heading"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.811"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_heading" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <TextView
         android:id="@+id/streaming_subs_instructions"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lato"
         android:gravity="center"
         android:text="@string/tap_to_select_streaming_services"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/streaming_subscriptions_heading" />
 
@@ -70,15 +77,13 @@
 
     <GridView
         android:id="@+id/streamingServiceLogoGridview"
-        android:layout_width="275dp"
-        android:layout_height="350dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
         android:background="@drawable/dark_card_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/streaming_subs_instructions"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/streaming_subs_instructions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

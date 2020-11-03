@@ -11,7 +11,6 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email_address">Email Address</string>
-    <string name="bookmarks">Bookmarks</string>
     <string name="discover">Discover</string>
     <string name="account">Account</string>
     <string name="tap_to_select_streaming_services">Tap to select the streaming services you are subscribed to.</string>
@@ -31,5 +30,8 @@
     <string name="review_score">Review Score</string>
     <string name="g">G</string>
     <string name="_80">80%</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="bookmarks">Bookmarks</string>
 
 </resources>

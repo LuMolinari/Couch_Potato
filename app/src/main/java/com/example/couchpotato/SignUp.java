@@ -1,7 +1,5 @@
 package com.example.couchpotato;
 
-import android.app.Activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
-public class SignUp extends Activity implements View.OnClickListener {
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuthenticationManager firebaseAuthenticationManager;
     private Button signUPButton;
     private EditText firstNameField;
@@ -22,7 +19,7 @@ public class SignUp extends Activity implements View.OnClickListener {
     private EditText emailField;
     private EditText passwordField;
     private TextView linkToLoginTextview;
-    private DatabaseManager databaseManager = new DatabaseManager();
+    private final DatabaseManager databaseManager = new DatabaseManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,7 +94,7 @@ public class SignUp extends Activity implements View.OnClickListener {
     }
 
     public void openHomeFragmentPage() {
-        Intent intent = new Intent(this, HomeFragmentPage.class);
+        Intent intent = new Intent(this, nav_bar_layout.class);
         startActivity(intent);
         finish();
     }
