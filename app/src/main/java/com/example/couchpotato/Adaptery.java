@@ -1,6 +1,8 @@
 package com.example.couchpotato;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +21,7 @@ import java.util.List;
 public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
 
     private Context mContext;
-    private List<MovieModelClass> mData;
+    private static List<MovieModelClass> mData;
 
     public Adaptery(Context mContext, List<MovieModelClass> mData) {
         this.mContext = mContext;
@@ -51,12 +55,30 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView img;
+        MovieSingleton movieSingleton = MovieSingleton.getInstance();
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             img = itemView.findViewById(R.id.movieImage);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Log.d("Adaptery", "Position: " + position);
+                    Log.d("Adaptery", "Id: " + mData.get(position).getId());
+                    String id = mData.get(position).getId();
+                    movieSingleton.setMovieId(id);
+                    movieSingleton.setMovieModelClass((MovieModelClass)mData.get(position));
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    Fragment myFragment = new MovieProfileFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).commit();
+
+
+                }
+            });
         }
+
     }
 }

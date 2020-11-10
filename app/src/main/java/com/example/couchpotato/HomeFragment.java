@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uwetrottmann.trakt5.entities.Movie;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
 
     private GetData getData;
     private TextView pageTextView;
+    private MovieSingleton movieSingleton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -209,6 +212,9 @@ public class HomeFragment extends Fragment {
                     model.setId(jsonObject1.getString("id"));
                     model.setTitle(jsonObject1.getString("title"));
                     model.setImg(jsonObject1.getString("poster_path"));
+                    model.setImg2(jsonObject1.getString("backdrop_path"));
+                    model.setReviewScore(jsonObject1.getString("vote_average"));
+                    model.setDescription(jsonObject1.getString("overview"));
 
 
                     movieList.add(model);

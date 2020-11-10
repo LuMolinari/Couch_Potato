@@ -6,14 +6,20 @@ public class MovieModelClass {
     private String id;
     private String title;
     private String img;
+    private String img2;
     private String reviewScore;
+    private String description;
 
-    public MovieModelClass(String id, String title, String img, String reviewScore) {
+    public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description) {
         this.id = id;
         this.title = title;
         this.img = img;
+        this.img2 = img2;
         this.reviewScore = reviewScore;
+        this.description = description;
     }
+
+
 
     public MovieModelClass() {
 
@@ -49,5 +55,22 @@ public class MovieModelClass {
 
     public void setReviewScore(String reviewScore) {
         this.reviewScore = reviewScore;
+    }
+
+
+    public void setImg2(String img2) {
+        this.img2 = img2;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImg2() {
+        return img2;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
