@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="375dp"
+    android:layout_height="200dp"
+    android:background="@color/textFieldBackground" >
+
+
+    <ImageView
+        android:id="@+id/img_moviePoster"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/whiteText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_movieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/lato"
+        android:text="Movie Title"
+        android:textSize="24sp"
+        android:textColor="@color/whiteText"
+        app:layout_constraintStart_toEndOf="@+id/img_moviePoster"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_releaseYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Release Year"
+        android:fontFamily="@font/lato"
+        android:textSize="18sp"
+        android:textColor="@color/whiteText"
+        app:layout_constraintStart_toStartOf="@+id/tv_movieTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_movieTitle" />
+
+    <TextView
+        android:id="@+id/tv_reviewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Review Score"
+        android:fontFamily="@font/lato"
+        android:textSize="18sp"
+        android:textColor="@color/whiteText"
+        app:layout_constraintStart_toStartOf="@+id/tv_releaseYear"
+        app:layout_constraintTop_toBottomOf="@+id/tv_releaseYear" />
+
+    <ImageView
+        android:id="@+id/img_bookmark"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_movieTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/ic_baseline_bookmark_border_24"
+        android:backgroundTint="@color/whiteText"/>
+
+    <ImageView
+        android:id="@+id/img_like"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ic_baseline_favorite_24"
+        android:backgroundTint="@color/whiteText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/img_bookmark"
+        app:layout_constraintTop_toBottomOf="@+id/img_bookmark" />
+
+    <ImageView
+        android:id="@+id/img_share"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ic_baseline_share_24"
+        android:backgroundTint="@color/whiteText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_like" />
+</androidx.constraintlayout.widget.ConstraintLayout>
