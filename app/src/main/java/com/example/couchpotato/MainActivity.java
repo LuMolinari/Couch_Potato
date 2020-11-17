@@ -1,6 +1,7 @@
 package com.example.couchpotato;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuthenticationManager firebaseAuthenticationManager;
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText signInEmailField;
     private EditText signInPasswordField;
     private TextView linkToSingUpTextView;
+    private SharedPreferences userLocalDatabase;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firebaseAuthenticationManager = new FirebaseAuthenticationManager();
         signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
+        userLocalDatabase = getSharedPreferences("userDetails", 0);
+        Map<String, String> userData = (Map) userLocalDatabase.getAll();
 
         signInEmailField = findViewById(R.id.signInEmailField);
         signInPasswordField = findViewById(R.id.signInPasswordField);
@@ -54,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            // see execute() javadoc
 //        }
 
+        if(userData.size() == 0) {
+            //do nothing
+        } else {
+            signInEmailField.setText(userData.get("email"));
+            signInPasswordField.setText(userData.get("password"));
+        }
 
         linkToSingUpTextView = findViewById(R.id.linkToSignUpTextview);
         linkToSingUpTextView.setOnClickListener(this);
@@ -101,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Write below this comment whatever you want the app to do
                      when log in is successful
                      */
+                    saveLoginDetails();
                     Toast.makeText(MainActivity.this, "Log In Successful", Toast.LENGTH_SHORT).show();
                     openHomeFragmentPage();
                 }
@@ -118,6 +131,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
         finish();
+    }
+
+    private void saveLoginDetails() {
+        SharedPreferences.Editor sharePreferenceEditor = userLocalDatabase.edit();
+        sharePreferenceEditor.putString("email", signInEmailField.getText().toString());
+        sharePreferenceEditor.putString("password", signInPasswordField.getText().toString());
+        sharePreferenceEditor.commit();
     }
 
 }
