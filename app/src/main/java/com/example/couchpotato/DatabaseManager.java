@@ -168,8 +168,8 @@ public class DatabaseManager {
         });
     }
 
-    public void createDocument(String collectionPath, String documentPath, String firstFieldKey, Object fieldValue) {
-        DocumentReference documentReference = db.collection(collectionPath).document(documentPath);
+    public void createDocument(String collectionPath, String documentName, String firstFieldKey, Object fieldValue) {
+        DocumentReference documentReference = db.collection(collectionPath).document(documentName);
 
         HashMap<String, Object> data = new HashMap<>();
         data.put(firstFieldKey, fieldValue);

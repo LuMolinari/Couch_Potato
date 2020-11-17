@@ -6,4 +6,5 @@
     <color name="textFieldBackground">#36535C</color>
     <color name="hintTextColor">#859193</color>
     <color name="whiteText">#E5E5E5</color>
+    <color name="grey">#A9A9A9</color>
 </resources>

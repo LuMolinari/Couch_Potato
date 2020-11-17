@@ -2,6 +2,7 @@ package com.example.couchpotato;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.uwetrottmann.trakt5.entities.Movie;
 
 import org.json.JSONArray;
@@ -52,6 +55,9 @@ public class HomeFragment extends Fragment {
     private GetData getData;
     private TextView pageTextView;
     private MovieSingleton movieSingleton;
+    private DatabaseManager databaseManager;
+    private FirebaseAuth mAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,6 +80,9 @@ public class HomeFragment extends Fragment {
 
 
         });
+
+        databaseManager = new DatabaseManager();
+        mAuth = FirebaseAuth.getInstance();
 
         nextButton = v.findViewById(R.id.nextButton);
         previousButton = v.findViewById(R.id.previousButton);
@@ -216,13 +225,28 @@ public class HomeFragment extends Fragment {
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
 
+                    String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
 
-                    movieList.add(model);
+                    int finalI = i;
+                    databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
+                        @Override
+                        public void callBack(Object status) {
+                            DocumentSnapshot snapshot = (DocumentSnapshot) status;
+                            for (Object ds : snapshot.getData().values()) {
+                                if (ds.toString().equals(model.getId())) {
+                                    model.setBookMarked(true);
+                                    break;
+                                } else {
+                                    model.setBookMarked(false);
+                                }
+                            }
+                            movieList.add(model);
+                            if (finalI == jsonArray.length() - 1) {
+                                PutDataIntoRecyclerView(movieList);
+                            }
+                        }
+                    });
                 }
-
-
-                PutDataIntoRecyclerView(movieList);
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

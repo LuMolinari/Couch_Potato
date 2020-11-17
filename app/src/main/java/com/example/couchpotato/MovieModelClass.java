@@ -9,14 +9,16 @@ public class MovieModelClass {
     private String img2;
     private String reviewScore;
     private String description;
+    private boolean isBookMarked;
 
-    public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description) {
+    public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description, boolean isBookmarked) {
         this.id = id;
         this.title = title;
         this.img = img;
         this.img2 = img2;
         this.reviewScore = reviewScore;
         this.description = description;
+        this.isBookMarked = isBookmarked;
     }
 
 
@@ -72,5 +74,13 @@ public class MovieModelClass {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean getBookMarked() {
+        return isBookMarked;
+    }
+
+    public void setBookMarked(boolean bookMarked) {
+        isBookMarked = bookMarked;
     }
 }
