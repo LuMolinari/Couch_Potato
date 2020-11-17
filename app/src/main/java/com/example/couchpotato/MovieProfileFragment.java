@@ -1,14 +1,18 @@
 package com.example.couchpotato;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +21,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MovieProfileFragment extends Fragment {
@@ -41,8 +49,12 @@ public class MovieProfileFragment extends Fragment {
     private TextView movieRate;
     private RecyclerView recyclerView;
     private String similarMoviesUrl;
+    private ImageButton bookmarkImageButton;
 
+    private String TAG = "MovieProfileFragment";
 
+    private DatabaseManager databaseManager;
+    private FirebaseAuth mAuth;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,9 +65,17 @@ public class MovieProfileFragment extends Fragment {
         movieDescription = v.findViewById(R.id.contentSummaryTextView);
         movieRate = v.findViewById(R.id.reviewScoreTextView);
         recyclerView = v.findViewById(R.id.contentRecyclerView);
+        bookmarkImageButton = v.findViewById(R.id.bookmarkImageButton);
+
+        databaseManager = new DatabaseManager();
+        mAuth = FirebaseAuth.getInstance();
 
         String movieId = movieSingleton.getMovieId();
         MovieModelClass movieModelClass = movieSingleton.getMovieModelClass();
+
+        if (movieModelClass.getBookMarked()) {
+            bookmarkImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+        }
 
         Log.d("MovieProfileFrag", " Title: " + movieModelClass.getTitle());
 
@@ -71,6 +91,39 @@ public class MovieProfileFragment extends Fragment {
 
 
         similarMoviesUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/similar?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&page=1";
+
+        bookmarkImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (movieModelClass.getBookMarked()) {
+                    String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+                    String documentName = "BookmarkedMovies";
+                    databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
+                    Toast.makeText(getContext(), "Bookmark removed", Toast.LENGTH_SHORT).show();
+                    bookmarkImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
+                    movieModelClass.setBookMarked(false);
+                } else {
+                    String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+                    String documentName = "BookmarkedMovies";
+
+                    databaseManager.checkIfThisDocumentExists(collectionPath + "/" + documentName, new FirebaseCallback() {
+                        @Override
+                        public void callBack(Object status) {
+                            Boolean documentExists = (Boolean) status;
+                            if (documentExists) {
+                                databaseManager.createNewField(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
+                            } else {
+                                databaseManager.createDocument(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
+                            }
+                            bookmarkImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+                            movieModelClass.setBookMarked(true);
+                            Toast.makeText(getContext(), "Bookmark saved", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
         GetData getData = new GetData();
         getData.execute();
         return v;
@@ -141,12 +194,30 @@ public class MovieProfileFragment extends Fragment {
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
 
-
-                    movieList.add(model);
+                    String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
+                    int finalI = i;
+                    databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
+                        @Override
+                        public void callBack(Object status) {
+                            DocumentSnapshot snapshot = (DocumentSnapshot) status;
+                            for (Object ds : snapshot.getData().values()) {
+                                if (ds.toString().equals(model.getId())) {
+                                    model.setBookMarked(true);
+                                    break;
+                                } else {
+                                    model.setBookMarked(false);
+                                }
+                            }
+                            movieList.add(model);
+                            if (finalI == jsonArray.length() - 1) {
+                                PutDataIntoRecyclerView(movieList);
+                            }
+                        }
+                    });
                 }
 
 
-                PutDataIntoRecyclerView(movieList);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
