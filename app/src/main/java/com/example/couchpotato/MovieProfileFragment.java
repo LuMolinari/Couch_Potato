@@ -137,14 +137,14 @@ public class MovieProfileFragment extends Fragment {
             public void onClick(View view) {
                 if (movieModelClass.getFavoriteMovie()) {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
-                    String documentName = "Favorite Movies";
+                    String documentName = "FavoriteMovies";
                     databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
                     Toast.makeText(getContext(), "Favorite removed", Toast.LENGTH_SHORT).show();
                     favoriteImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
                     movieModelClass.setFavoriteMovie(false);
                 } else {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
-                    String documentName = "Favorite Movies";
+                    String documentName = "FavoriteMovies";
 
                     databaseManager.checkIfThisDocumentExists(collectionPath + "/" + documentName, new FirebaseCallback() {
                         @Override
@@ -254,7 +254,7 @@ public class MovieProfileFragment extends Fragment {
                             }
 
                             //check if movie is favorite
-                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/FavoriteMovies";
                             databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
                                 @Override
                                 public void callBack(Object status) {

@@ -242,7 +242,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             //check if movie is favorite
-                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/FavoriteMovies";
                             databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
                                 @Override
                                 public void callBack(Object status) {
