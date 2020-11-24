@@ -92,6 +92,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                     databaseManager.createDocument(collectionPath, documentName, "Movie1", "NoNumber");
                     databaseManager.deleteField(collectionPath + "/" + documentName, "Movie1");
+
+                    databaseManager.createNewField(collectionPath, "Favorite Movies", "Movie1", "No Number");
+                    databaseManager.deleteField(collectionPath + "/Favorite Movies", "Movie1");
+
                     Toast.makeText(SignUp.this, "Sign up Successful", Toast.LENGTH_SHORT).show();
                     openHomeFragmentPage();
                 }
