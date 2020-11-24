@@ -1,0 +1,364 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Couch Potato</string>\r\n    <string name=\"couch_potato\">Couch Potato</string>\r\n    <string name=\"not_registered_yet_sign_up_here\"><u>Not registered yet? Sign up here</u></string>\r\n    <string name=\"sign_in\">Sign In</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"email\">Email</string>\r\n    <string name=\"logo\">logo</string>\r\n    <string name=\"sign_up\">Sign Up</string>\r\n    <string name=\"already_have_an_account_login_here\"><u>Already Have An Account? Login Here</u></string>\r\n    <string name=\"first_name\">First Name</string>\r\n    <string name=\"last_name\">Last Name</string>\r\n    <string name=\"email_address\">Email Address</string>\r\n    <string name=\"discover\">Discover</string>\r\n    <string name=\"account\">Account</string>\r\n    <string name=\"tap_to_select_streaming_services\">Tap to select the streaming services you are subscribed to.</string>\r\n    <string name=\"streaming_subscriptions\">Streaming Subscriptions</string>\r\n    <string name=\"hint_search\">Search</string>\r\n    <string name=\"favorites\">Favorites</string>\r\n    <string name=\"my_account\">My Account</string>\r\n    <string name=\"account_settings\">Account Settings</string>\r\n    <string name=\"recommend\">Recommend</string>\r\n    <string name=\"change_password\">Change Password</string>\r\n    <string name=\"new_password\">New Password...</string>\r\n    <string name=\"new_name\">New Name...</string>\r\n    <string name=\"edit_name\">Edit Name</string>\r\n    <string name=\"title\">Title</string>\r\n    <string name=\"content_summary_lorem_ipsum\">Content Summary, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum finibus mi quis placerat venenatis. Aenean egestas nisi enim, in dapibus neque euismod venenatis.</string>\r\n    <string name=\"mpaa_rating\">MPAA Rating</string>\r\n    <string name=\"review_score\">Review Score</string>\r\n    <string name=\"g\">G</string>\r\n    <string name=\"_80\">80%</string>\r\n    <string name=\"search\">Search</string>\r\n    <string name=\"home\">Home</string>\r\n    <string name=\"bookmarks\">Bookmarks</string>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision bcf32075ebc83210346781266e1993e608eca822)
++++ app/src/main/res/values/strings.xml	(date 1605638001789)
+@@ -23,7 +23,7 @@
+     <string name="change_password">Change Password</string>
+     <string name="new_password">New Password...</string>
+     <string name="new_name">New Name...</string>
+-    <string name="edit_name">Edit Name</string>
++    <string name="edit_name">Change Name</string>
+     <string name="title">Title</string>
+     <string name="content_summary_lorem_ipsum">Content Summary, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum finibus mi quis placerat venenatis. Aenean egestas nisi enim, in dapibus neque euismod venenatis.</string>
+     <string name="mpaa_rating">MPAA Rating</string>
+Index: app/src/main/res/layout/account_settings_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@drawable/gradient_background\">\r\n\r\n\r\n    <androidx.constraintlayout.widget.Guideline\r\n        android:id=\"@+id/guideline7\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintGuide_percent=\"0.15\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/my_account\"\r\n        android:textSize=\"36sp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/guideline7\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/back_button\"\r\n        android:layout_width=\"40dip\"\r\n        android:layout_height=\"40dip\"\r\n        android:background=\"@drawable/ic_arrow_back_ios\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.043\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView4\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"@string/account_settings\"\r\n        android:textSize=\"30sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/imageView3\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/imageView3\" />\r\n\r\n    <ScrollView\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"450dp\"\r\n        android:background=\"@drawable/dark_card_view\"\r\n\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/textView4\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_margin=\"5sp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView8\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:gravity=\"center_horizontal\"\r\n                android:text=\"@string/edit_name\"\r\n                android:textSize=\"24sp\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/newNameEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"@string/new_name\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textColor=\"@color/whiteText\"\r\n                android:textColorHint=\"@color/hintTextColor\"\r\n                app:backgroundTint=\"@color/whiteText\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView9\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:gravity=\"center_horizontal\"\r\n                android:text=\"@string/change_password\"\r\n                android:textSize=\"24sp\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/newPasswordEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:autofillHints=\"@string/change_password\"\r\n                android:ems=\"10\"\r\n                android:hint=\"@string/new_password\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textColor=\"@color/whiteText\"\r\n                android:textColorHint=\"@color/hintTextColor\"\r\n                app:backgroundTint=\"@color/whiteText\" />\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView3\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:background=\"@drawable/ic_baseline_settings_24\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/textView4\"\r\n        app:layout_constraintHorizontal_bias=\"0.5\"\r\n        app:layout_constraintHorizontal_chainStyle=\"packed\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/guideline7\"\r\n        app:tint=\"@color/whiteText\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/account_settings_fragment.xml	(revision bcf32075ebc83210346781266e1993e608eca822)
++++ app/src/main/res/layout/account_settings_fragment.xml	(date 1605638001799)
+@@ -47,65 +47,112 @@
+         app:layout_constraintHorizontal_bias="0.5"
+         app:layout_constraintStart_toEndOf="@+id/imageView3" />
+ 
+-    <ScrollView
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:id="@+id/scrollView2"
+         android:layout_width="300dp"
+         android:layout_height="450dp"
++
+         android:background="@drawable/dark_card_view"
+-
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/textView4">
+ 
+-        <LinearLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_margin="5sp"
+-            android:orientation="vertical">
+ 
+-            <TextView
+-                android:id="@+id/textView8"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:gravity="center_horizontal"
+-                android:text="@string/edit_name"
+-                android:textSize="24sp" />
++        <TextView
++            android:id="@+id/textView8"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:text="@string/edit_name"
++            android:textSize="24sp"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
+ 
+-            <EditText
+-                android:id="@+id/newNameEditText"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="15dp"
+-                android:ems="10"
+-                android:hint="@string/new_name"
+-                android:inputType="textPersonName"
+-                android:textColor="@color/whiteText"
+-                android:textColorHint="@color/hintTextColor"
+-                app:backgroundTint="@color/whiteText" />
++        <EditText
++            android:id="@+id/newNameEditText"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:ems="10"
++            android:hint="@string/new_name"
++            android:inputType="textPersonName"
++            android:textColor="@color/whiteText"
++            android:textColorHint="@color/hintTextColor"
++            app:backgroundTint="@color/whiteText"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+ 
+-            <TextView
+-                android:id="@+id/textView9"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="15dp"
+-                android:gravity="center_horizontal"
+-                android:text="@string/change_password"
+-                android:textSize="24sp" />
++        <TextView
++            android:id="@+id/textView9"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:text="Change Email"
++            android:textSize="24sp"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/newNameEditText" />
++
++        <TextView
++            android:id="@+id/textView15"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:text="@string/change_password"
++            android:textSize="24sp"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintHorizontal_bias="0.424"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/newEmailEditText" />
+ 
+-            <EditText
+-                android:id="@+id/newPasswordEditText"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="15dp"
+-                android:autofillHints="@string/change_password"
+-                android:ems="10"
+-                android:hint="@string/new_password"
+-                android:inputType="textPersonName"
+-                android:textColor="@color/whiteText"
+-                android:textColorHint="@color/hintTextColor"
+-                app:backgroundTint="@color/whiteText" />
+-        </LinearLayout>
+-    </ScrollView>
++        <EditText
++            android:id="@+id/newEmailEditText"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:autofillHints="@string/change_password"
++            android:ems="10"
++            android:hint="@string/new_password"
++            android:inputType="textPersonName"
++            android:textColor="@color/whiteText"
++            android:textColorHint="@color/hintTextColor"
++            app:backgroundTint="@color/whiteText"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/textView9" />
++
++        <EditText
++            android:id="@+id/newPasswordEditText"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15dp"
++            android:autofillHints="@string/change_password"
++            android:ems="10"
++            android:hint="@string/new_password"
++            android:inputType="textPersonName"
++            android:textColor="@color/whiteText"
++            android:textColorHint="@color/hintTextColor"
++            app:backgroundTint="@color/whiteText"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/textView15" />
++
++        <Button
++            android:id="@+id/saveAccountSettingsButtton"
++            style="@style/Widget.AppCompat.Button.Colored"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginBottom="5dp"
++            android:text="Save"
++            android:textSize="18sp"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent" />
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+     <ImageView
+         android:id="@+id/imageView3"
+@@ -119,4 +166,5 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="@+id/guideline7"
+         app:tint="@color/whiteText" />
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/couchpotato/AccountSettingsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.couchpotato;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentTransaction;\r\n\r\npublic class AccountSettingsFragment extends Fragment {\r\n\r\n    ImageView btn_back;\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n        View v = inflater.inflate(R.layout.account_settings_fragment, container, false);\r\n        btn_back = v.findViewById(R.id.back_button);\r\n\r\n        btn_back.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                FragmentTransaction fragmentTransaction = getActivity()\r\n                        .getSupportFragmentManager().beginTransaction();\r\n                fragmentTransaction.replace(R.id.fragment_container, new MyAccountFragment());\r\n                fragmentTransaction.commit();\r\n            }\r\n        });\r\n\r\n\r\n        return v;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/couchpotato/AccountSettingsFragment.java	(revision bcf32075ebc83210346781266e1993e608eca822)
++++ app/src/main/java/com/example/couchpotato/AccountSettingsFragment.java	(date 1605640073545)
+@@ -1,25 +1,44 @@
+ package com.example.couchpotato;
+ 
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.widget.Button;
++import android.widget.EditText;
+ import android.widget.ImageView;
++import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.FragmentTransaction;
+ 
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.auth.UserProfileChangeRequest;
++
++import java.util.regex.Matcher;
++import java.util.regex.Pattern;
++
+ public class AccountSettingsFragment extends Fragment {
+ 
+     ImageView btn_back;
++    Button saveButton;
++    EditText newPassword;
++    EditText newEmail;
++    EditText newName;
+ 
+     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+ 
+         View v = inflater.inflate(R.layout.account_settings_fragment, container, false);
+         btn_back = v.findViewById(R.id.back_button);
++        newPassword = v.findViewById(R.id.newPasswordEditText);
++        newEmail = v.findViewById(R.id.newEmailEditText);
++        newName = v.findViewById(R.id.newNameEditText);
+ 
+         btn_back.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -31,7 +50,103 @@
+             }
+         });
+ 
++        saveButton = v.findViewById(R.id.saveAccountSettingsButtton);
++
++        saveButton.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                //open current user instance
++                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
++                String TAG = AccountSettingsFragment.class.getName();
++
++                //make sure user was found.
++                if (user != null) {
++                    boolean settingsChanged = false;
++
++                    if(!newPassword.getText().toString().isEmpty()){
++
++
++                        if (newPassword.getText().toString().length() >=8) {
++                            //change password from textview
++                            user.updatePassword(newPassword.getText().toString())
++                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
++                                        @Override
++                                        public void onComplete(@NonNull Task<Void> task) {
++                                            if (task.isSuccessful()) {
++                                                Log.d(TAG, "User password updated.");
++                                            }
++                                        }
++                                    });
++                            settingsChanged = true;
++                        } else{
++                            Toast.makeText(getActivity(), "Password Must Be Longer Than 8 Characters.", Toast.LENGTH_SHORT).show();
++
++                        }
++                    }
++                    if(!newName.getText().toString().isEmpty()){
++
++                        //create profile request
++                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
++                                .setDisplayName(newName.getText().toString())
++                                .build();
++
++                        //update user profile
++                        user.updateProfile(profileUpdates)
++                                .addOnCompleteListener(new OnCompleteListener<Void>() {
++                                    @Override
++                                    public void onComplete(@NonNull Task<Void> task) {
++                                        if (task.isSuccessful()) {
++                                            Log.d(TAG, "User profile updated.");
++                                        }
++                                    }
++                                });
++
++                        settingsChanged=true;
++                    }
++                    if(!newEmail.getText().toString().isEmpty()){
++                        //make sure new email is valid before sending it to firebase
++                        if (isValidEmail(newEmail.getText().toString())) {
++
++                            //update firebase email
++                            user.updateEmail(newEmail.getText().toString())
++                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
++                                        @Override
++                                        public void onComplete(@NonNull Task<Void> task) {
++                                            if (task.isSuccessful()) {
++                                                Log.d(TAG, "User email address updated.");
++                                            }
++                                        }
++                                    });
++                            settingsChanged = true;
++                        } else {
++                            //return error message
++                            Toast.makeText(getActivity(), "Email was invalid", Toast.LENGTH_SHORT).show();
++                        }
++                    }
++
++                    //display if changes were made
++                    if (settingsChanged) {
++                        Toast.makeText(getActivity(), "User Settings Updated", Toast.LENGTH_SHORT).show();
++
++                    } else {
++                        Toast.makeText(getActivity(), "No Settings Changed", Toast.LENGTH_SHORT).show();
++                    }
++                } else {
++                    //no user was found
++                    Toast.makeText(getActivity(), "No Active User Found", Toast.LENGTH_SHORT).show();
++                }
++
++
++            }
++        });
+ 
+         return v;
+     }
++
++    private boolean isValidEmail(String string) {
++        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
++        Matcher mat = pattern.matcher(string);
++
++        return mat.matches();
++    }
+ }
+Index: app/src/main/java/com/example/couchpotato/FragmentChangeListener.java
+===================================================================
+--- app/src/main/java/com/example/couchpotato/FragmentChangeListener.java	(revision bcf32075ebc83210346781266e1993e608eca822)
++++ app/src/main/java/com/example/couchpotato/FragmentChangeListener.java	(revision bcf32075ebc83210346781266e1993e608eca822)
+@@ -1,7 +0,0 @@
+-package com.example.couchpotato;
+-
+-import androidx.fragment.app.Fragment;
+-
+-public interface FragmentChangeListener {
+-    void replaceFragment(Fragment fragment);
+-}

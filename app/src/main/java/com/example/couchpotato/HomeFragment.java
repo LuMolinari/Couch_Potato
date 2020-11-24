@@ -2,13 +2,10 @@ package com.example.couchpotato;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,17 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.uwetrottmann.trakt5.entities.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,6 +58,7 @@ public class HomeFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.home_fragment, container, false);
 
+        //switch fragment when account button is clicked
         ImageButton accountButton = v.findViewById(R.id.accountsImageButton);
         accountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +75,7 @@ public class HomeFragment extends Fragment {
 
 
         });
+
 
         databaseManager = new DatabaseManager();
         mAuth = FirebaseAuth.getInstance();
@@ -228,6 +224,7 @@ public class HomeFragment extends Fragment {
                     //check if movie is book marked
                     String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
                     int finalI = i;
+
                     databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
                         @Override
                         public void callBack(Object status) {
@@ -242,7 +239,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             //check if movie is favorite
-                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/FavoriteMovies";
                             databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
                                 @Override
                                 public void callBack(Object status) {
