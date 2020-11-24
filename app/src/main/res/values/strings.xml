@@ -23,7 +23,7 @@
     <string name="change_password">Change Password</string>
     <string name="new_password">New Password...</string>
     <string name="new_name">New Name...</string>
-    <string name="edit_name">Edit Name</string>
+    <string name="edit_name">Change Name</string>
     <string name="title">Title</string>
     <string name="content_summary_lorem_ipsum">Content Summary, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum finibus mi quis placerat venenatis. Aenean egestas nisi enim, in dapibus neque euismod venenatis.</string>
     <string name="mpaa_rating">MPAA Rating</string>
