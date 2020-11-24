@@ -10,8 +10,9 @@ public class MovieModelClass {
     private String reviewScore;
     private String description;
     private boolean isBookMarked;
+    private boolean isFavoriteMovie;
 
-    public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description, boolean isBookmarked) {
+    public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description, boolean isBookmarked, boolean isFavoriteMovie) {
         this.id = id;
         this.title = title;
         this.img = img;
@@ -19,6 +20,7 @@ public class MovieModelClass {
         this.reviewScore = reviewScore;
         this.description = description;
         this.isBookMarked = isBookmarked;
+        this.isFavoriteMovie = isFavoriteMovie;
     }
 
 
@@ -82,5 +84,13 @@ public class MovieModelClass {
 
     public void setBookMarked(boolean bookMarked) {
         isBookMarked = bookMarked;
+    }
+
+    public boolean getFavoriteMovie() {
+        return isFavoriteMovie;
+    }
+
+    public void setFavoriteMovie(boolean favoriteMovie) {
+        isFavoriteMovie = favoriteMovie;
     }
 }

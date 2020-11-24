@@ -3,6 +3,7 @@ package com.example.couchpotato;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -50,6 +51,7 @@ public class MovieProfileFragment extends Fragment {
     private RecyclerView recyclerView;
     private String similarMoviesUrl;
     private ImageButton bookmarkImageButton;
+    private ImageButton favoriteImageButton;
 
     private String TAG = "MovieProfileFragment";
 
@@ -66,6 +68,7 @@ public class MovieProfileFragment extends Fragment {
         movieRate = v.findViewById(R.id.reviewScoreTextView);
         recyclerView = v.findViewById(R.id.contentRecyclerView);
         bookmarkImageButton = v.findViewById(R.id.bookmarkImageButton);
+        favoriteImageButton = v.findViewById(R.id.favoriteImageButton);
 
         databaseManager = new DatabaseManager();
         mAuth = FirebaseAuth.getInstance();
@@ -75,6 +78,10 @@ public class MovieProfileFragment extends Fragment {
 
         if (movieModelClass.getBookMarked()) {
             bookmarkImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+        }
+
+        if (movieModelClass.getFavoriteMovie()) {
+            favoriteImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
         }
 
         Log.d("MovieProfileFrag", " Title: " + movieModelClass.getTitle());
@@ -124,6 +131,41 @@ public class MovieProfileFragment extends Fragment {
                 }
             }
         });
+
+        favoriteImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (movieModelClass.getFavoriteMovie()) {
+                    String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+                    String documentName = "Favorite Movies";
+                    databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
+                    Toast.makeText(getContext(), "Favorite removed", Toast.LENGTH_SHORT).show();
+                    favoriteImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
+                    movieModelClass.setFavoriteMovie(false);
+                } else {
+                    String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+                    String documentName = "Favorite Movies";
+
+                    databaseManager.checkIfThisDocumentExists(collectionPath + "/" + documentName, new FirebaseCallback() {
+                        @Override
+                        public void callBack(Object status) {
+                            Boolean documentExists = (Boolean) status;
+                            if (documentExists) {
+                                databaseManager.createNewField(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
+                            } else {
+                                databaseManager.createDocument(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
+                            }
+                            favoriteImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+                            movieModelClass.setFavoriteMovie(true);
+                            Toast.makeText(getContext(), "Bookmark saved", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                }
+            }
+        });
+
         GetData getData = new GetData();
         getData.execute();
         return v;
@@ -194,6 +236,8 @@ public class MovieProfileFragment extends Fragment {
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
 
+
+                    //check if movie is book marked
                     String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
                     int finalI = i;
                     databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
@@ -208,17 +252,30 @@ public class MovieProfileFragment extends Fragment {
                                     model.setBookMarked(false);
                                 }
                             }
-                            movieList.add(model);
-                            if (finalI == jsonArray.length() - 1) {
-                                PutDataIntoRecyclerView(movieList);
-                            }
+
+                            //check if movie is favorite
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
+                                @Override
+                                public void callBack(Object status) {
+                                    DocumentSnapshot snapshot = (DocumentSnapshot) status;
+                                    for (Object ds: snapshot.getData().values()) {
+                                        if (ds.toString().equals(model.getId())) {
+                                            model.setFavoriteMovie(true);
+                                            break;
+                                        } else {
+                                            model.setFavoriteMovie(false);
+                                        }
+                                    }
+                                    movieList.add(model);
+                                    if (finalI == jsonArray.length() - 1) {
+                                        PutDataIntoRecyclerView(movieList);
+                                    }
+                                }
+                            });
                         }
                     });
                 }
-
-
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

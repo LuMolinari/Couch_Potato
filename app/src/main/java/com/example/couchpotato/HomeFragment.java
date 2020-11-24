@@ -225,8 +225,8 @@ public class HomeFragment extends Fragment {
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
 
+                    //check if movie is book marked
                     String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
-
                     int finalI = i;
                     databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
                         @Override
@@ -240,10 +240,27 @@ public class HomeFragment extends Fragment {
                                     model.setBookMarked(false);
                                 }
                             }
-                            movieList.add(model);
-                            if (finalI == jsonArray.length() - 1) {
-                                PutDataIntoRecyclerView(movieList);
-                            }
+
+                            //check if movie is favorite
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
+                                @Override
+                                public void callBack(Object status) {
+                                    DocumentSnapshot snapshot = (DocumentSnapshot) status;
+                                    for (Object ds: snapshot.getData().values()) {
+                                        if (ds.toString().equals(model.getId())) {
+                                            model.setFavoriteMovie(true);
+                                            break;
+                                        } else {
+                                            model.setFavoriteMovie(false);
+                                        }
+                                    }
+                                    movieList.add(model);
+                                    if (finalI == jsonArray.length() - 1) {
+                                        PutDataIntoRecyclerView(movieList);
+                                    }
+                                }
+                            });
                         }
                     });
                 }
