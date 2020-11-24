@@ -1,7 +1,5 @@
 package com.example.couchpotato;
 
-import java.util.ArrayList;
-
 public class MovieModelClass {
     private String id;
     private String title;
@@ -11,6 +9,11 @@ public class MovieModelClass {
     private String description;
     private boolean isBookMarked;
     private boolean isFavoriteMovie;
+
+
+
+    //used in bookmarks item
+    private String releaseYear;
 
     public MovieModelClass(String id, String title, String img, String img2, String reviewScore, String description, boolean isBookmarked, boolean isFavoriteMovie) {
         this.id = id;
@@ -93,4 +96,9 @@ public class MovieModelClass {
     public void setFavoriteMovie(boolean favoriteMovie) {
         isFavoriteMovie = favoriteMovie;
     }
+
+    //used for bookmark item
+    public String getReleaseYear() { return releaseYear;  }
+
+    public void setReleaseYear(String releaseYear) { this.releaseYear = releaseYear; }
 }

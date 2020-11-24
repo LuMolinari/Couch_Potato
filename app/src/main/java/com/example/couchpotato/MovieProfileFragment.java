@@ -1,17 +1,13 @@
 package com.example.couchpotato;
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.BoringLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,12 +32,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MovieProfileFragment extends Fragment {
 
-    private MovieSingleton movieSingleton = MovieSingleton.getInstance();
+    private final MovieSingleton movieSingleton = MovieSingleton.getInstance();
     private ImageView moviePic;
     private TextView movieTitle;
     private TextView movieDescription;
@@ -53,7 +46,7 @@ public class MovieProfileFragment extends Fragment {
     private ImageButton bookmarkImageButton;
     private ImageButton favoriteImageButton;
 
-    private String TAG = "MovieProfileFragment";
+    private final String TAG = "MovieProfileFragment";
 
     private DatabaseManager databaseManager;
     private FirebaseAuth mAuth;
@@ -137,14 +130,14 @@ public class MovieProfileFragment extends Fragment {
             public void onClick(View view) {
                 if (movieModelClass.getFavoriteMovie()) {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
-                    String documentName = "Favorite Movies";
+                    String documentName = "FavoriteMovies";
                     databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
                     Toast.makeText(getContext(), "Favorite removed", Toast.LENGTH_SHORT).show();
                     favoriteImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
                     movieModelClass.setFavoriteMovie(false);
                 } else {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
-                    String documentName = "Favorite Movies";
+                    String documentName = "FavoriteMovies";
 
                     databaseManager.checkIfThisDocumentExists(collectionPath + "/" + documentName, new FirebaseCallback() {
                         @Override
@@ -254,7 +247,7 @@ public class MovieProfileFragment extends Fragment {
                             }
 
                             //check if movie is favorite
-                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/Favorite Movies";
+                            String favoriteMoviesDocPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/FavoriteMovies";
                             databaseManager.getDocumentSnapshot(favoriteMoviesDocPath, new FirebaseCallback() {
                                 @Override
                                 public void callBack(Object status) {
