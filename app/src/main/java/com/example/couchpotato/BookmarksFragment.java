@@ -32,7 +32,7 @@ public class BookmarksFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         bookmarkItems = new ArrayList<>();
-        bookmarkItems.add(new BookmarkItem(R.drawable.ic_baseline_live_tv_24, "Spuds 3", "2020", "*****"));
+        //bookmarkItems.add(new BookmarkItem(R.drawable.ic_baseline_live_tv_24, "Spuds 3", "2020", "*****"));
 
         // build recycler view
         final View rootView = inflater.inflate(R.layout.bookmarks_fragment, container, false);

@@ -1,12 +1,12 @@
 package com.example.couchpotato;
 
-import android.media.Image;
-
 public class BookmarkItem {
-    private int mMoviePoster;
-    private String mMovieTitle, mReleaseYear, mReviewScore;
+    private final String mMoviePoster;
+    private final String mMovieTitle;
+    private final String mReleaseYear;
+    private final String mReviewScore;
 
-    public BookmarkItem (int moviePoster, String movieTitle, String releaseYear, String reviewScore){
+    public BookmarkItem (String moviePoster, String movieTitle, String releaseYear, String reviewScore){
         mMoviePoster = moviePoster;
         mMovieTitle = movieTitle;
         mReleaseYear = releaseYear;
@@ -14,7 +14,7 @@ public class BookmarkItem {
     }
 
 
-    public int getMoviePoster() {
+    public String getMoviePoster() {
         return mMoviePoster;
     }
 

@@ -176,8 +176,8 @@ public class FavoritesFragment extends Fragment {
                 System.out.println("release: "+jObject.getString("release_date"));
                 System.out.println("score: "+jObject.getString("poster_path"));
 
-                BookmarkItem item = new BookmarkItem(jObject.getInt("poster_path"),
-                        jObject.getString("title"),jObject.getString("release_date"),jObject.getString("poster_path"));
+                BookmarkItem item = new BookmarkItem(jObject.getString("poster_path"),
+                        jObject.getString("title"),jObject.getString("release_date"),jObject.getString("vote_average"));
 
                 favoritesList.add(item);
 
