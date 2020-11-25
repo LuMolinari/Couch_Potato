@@ -54,7 +54,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
 //      need to use string and load image with glide
 //      holder.moviePoster.setImageResource(currentItem.getMoviePoster());
         Glide.with(mContext)
-                .load("https://image.tmdb.org/t/p/w500" + mBookmarkItems.get(position).getMoviePoster())
+                .load("https://image.tmdb.org/t/p/w154" + mBookmarkItems.get(position).getMoviePoster())
                 .into(holder.moviePoster);
 
 

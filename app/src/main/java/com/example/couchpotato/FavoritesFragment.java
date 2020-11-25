@@ -41,7 +41,6 @@ public class FavoritesFragment extends Fragment {
     private final ArrayList<BookmarkItem> favoritesList = new ArrayList<>();
     ProgressDialog pd;
     private String JSON_URL;
-    private GetData getData;
     int favoriteTotal;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +51,6 @@ public class FavoritesFragment extends Fragment {
 
         databaseManager = new DatabaseManager();
         mAuth = FirebaseAuth.getInstance();
-        getData = new GetData();
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +76,8 @@ public class FavoritesFragment extends Fragment {
                     //create query for api with id string.
                      JSON_URL = "https://api.themoviedb.org/3/movie/"+  ds.toString() +"?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&";
                      //call asynchronous class that will fetch the data
-                     getData.execute(JSON_URL);
+                    //because each call to get data is asynchronous each data call needs to be separate
+                    new GetData().execute(JSON_URL);
 
                 }
             }
@@ -153,6 +152,7 @@ public class FavoritesFragment extends Fragment {
             }
             return null;
         }
+
 
         @Override
         protected void onPostExecute(String result) {
