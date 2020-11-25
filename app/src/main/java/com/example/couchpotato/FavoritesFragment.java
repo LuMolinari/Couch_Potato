@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +42,7 @@ public class FavoritesFragment extends Fragment {
     ProgressDialog pd;
     private String JSON_URL;
     private GetData getData;
+    int favoriteTotal;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -67,6 +71,8 @@ public class FavoritesFragment extends Fragment {
             public void callBack(Object status) {
                 DocumentSnapshot snapshot = (DocumentSnapshot) status;
                 //loop through movie ids in document
+                favoriteTotal = snapshot.getData().size();
+
                 for (Object ds : snapshot.getData().values()) {
 
                     //create query for api with id string.
@@ -113,7 +119,6 @@ public class FavoritesFragment extends Fragment {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
 
-
                 InputStream stream = connection.getInputStream();
 
                 reader = new BufferedReader(new InputStreamReader(stream));
@@ -156,6 +161,33 @@ public class FavoritesFragment extends Fragment {
             System.out.println(result);
             //result is our actual json data.
             // Now turn it into a json object and use the objects to fill the favorites page.
+            try {
+                JSONObject jObject = new JSONObject(result);
+
+         //       BookmarkItem (int moviePoster, String movieTitle, String releaseYear, String reviewScore)
+//                model.setId(jsonObject1.getString("id"));
+//                model.setTitle(jsonObject1.getString("title"));
+//                model.setImg(jsonObject1.getString("poster_path"));
+//                model.setImg2(jsonObject1.getString("backdrop_path"));
+//                model.setReviewScore(jsonObject1.getString("vote_average"));
+//                model.setDescription(jsonObject1.getString("overview"));
+                System.out.println("Poster: "+jObject.getString("poster_path"));
+                System.out.println("Title: "+jObject.getString("title"));
+                System.out.println("release: "+jObject.getString("release_date"));
+                System.out.println("score: "+jObject.getString("poster_path"));
+
+                BookmarkItem item = new BookmarkItem(jObject.getInt("poster_path"),
+                        jObject.getString("title"),jObject.getString("release_date"),jObject.getString("poster_path"));
+
+                favoritesList.add(item);
+
+                //when we have received all asynchronous json data then fill the view.
+                if (favoritesList.size() == favoriteTotal){
+                    PutDataIntoRecyclerView(favoritesList);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }
