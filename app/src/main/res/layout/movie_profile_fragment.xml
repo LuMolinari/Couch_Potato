@@ -47,14 +47,15 @@
             <TextView
                 android:id="@+id/contentTitleTextView"
                 android:layout_width="0dp"
-                android:layout_height="50sp"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:singleLine="false"
                 android:text="@string/title"
                 android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contentPosterImageView"/>
+                app:layout_constraintTop_toBottomOf="@id/contentPosterImageView" />
 
             <TextView
                 android:id="@+id/contentSummaryTextView"
