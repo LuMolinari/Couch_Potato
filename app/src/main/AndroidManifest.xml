@@ -26,10 +26,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".nav_bar_layout">
+        <activity android:windowSoftInputMode="stateVisible|adjustPan" android:name=".nav_bar_layout">
             <intent-filter>
                 <action android:name="android.intent.action.nav_bar_layout"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+
             </intent-filter>
         </activity>
         <activity android:name=".SignUp">

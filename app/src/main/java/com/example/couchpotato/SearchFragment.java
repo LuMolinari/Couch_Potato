@@ -57,6 +57,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
     private String search;
     private String TAG = "Search Fragment";
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
         nextButton.setEnabled(false);
         previousButton.setEnabled(false);
         pageTextView.setText("0");
+
 
         getData = new GetData();
 
@@ -133,6 +135,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     Log.d(TAG, "Search: " + search);
                     JSON_URL = "https://api.themoviedb.org/3/search/movie?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&query=" + search + "&page=1&include_adult=false";
                     Log.d(TAG, "JSON URL: " + JSON_URL);
+                    getData = new GetData();
                     getData.execute();
                 }
                 return false;
@@ -232,6 +235,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     model.setId(jsonObject1.getString("id"));
                     model.setTitle(jsonObject1.getString("title"));
                     model.setImg(jsonObject1.getString("poster_path"));
+                    Log.d(TAG, "Image is: " + model.getImg());
                     model.setImg2(jsonObject1.getString("backdrop_path"));
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
