@@ -41,9 +41,16 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Glide.with(mContext)
-                .load("https://image.tmdb.org/t/p/w500" + mData.get(position).getImg())
-                .into(holder.img);
+        if (mData.get(position).getImg().equals("null")) {
+            Glide.with(mContext)
+                    .load("https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png")
+                    .into(holder.img);
+        } else {
+            Glide.with(mContext)
+                    .load("https://image.tmdb.org/t/p/w500" + mData.get(position).getImg())
+                    .into(holder.img);
+        }
+
     }
 
     @Override

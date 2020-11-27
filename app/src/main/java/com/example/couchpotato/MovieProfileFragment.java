@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,9 @@ public class MovieProfileFragment extends Fragment {
 
     private DatabaseManager databaseManager;
     private FirebaseAuth mAuth;
+
+    private TextView noSimilarMovies;
+    private ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class MovieProfileFragment extends Fragment {
         recyclerView = v.findViewById(R.id.contentRecyclerView);
         bookmarkImageButton = v.findViewById(R.id.bookmarkImageButton);
         favoriteImageButton = v.findViewById(R.id.favoriteImageButton);
+
+        noSimilarMovies = v.findViewById(R.id.no_similar_movies_available);
+        progressBar = v.findViewById(R.id.similar_movies_progress_bar);
 
         databaseManager = new DatabaseManager();
         mAuth = FirebaseAuth.getInstance();
@@ -82,12 +89,35 @@ public class MovieProfileFragment extends Fragment {
         String title = movieModelClass.getTitle() + "";
 
         movieTitle.setText(title);
-        movieDescription.setText(movieModelClass.getDescription() + "");
-        movieRate.setText(movieModelClass.getReviewScore() + "");
+        if (movieModelClass.getDescription().equals("")) {
+            movieDescription.setText("Description Not Available");
+        } else {
+            movieDescription.setText(movieModelClass.getDescription() + "");
+        }
 
-        Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500" + movieModelClass.getImg2())
-                .into(moviePic);
+        if (movieRate.equals("")) {
+            movieRate.setText("Not Ratings available");
+        } else {
+            movieRate.setText(movieModelClass.getReviewScore() + "");
+        }
+
+
+        if (movieModelClass.getImg2().equals("null")) {
+            if (movieModelClass.getImg().equals("null")) {
+                Glide.with(this)
+                        .load("https://merccapital.com.au/application/files/8114/5984/0563/image-not-available.jpg")
+                        .into(moviePic);
+            } else {
+                Glide.with(this)
+                        .load("https://image.tmdb.org/t/p/w500" + movieModelClass.getImg())
+                        .into(moviePic);
+            }
+        } else {
+            Glide.with(this)
+                    .load("https://image.tmdb.org/t/p/w500" + movieModelClass.getImg2())
+                    .into(moviePic);
+        }
+
 
 
         similarMoviesUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/similar?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&page=1";
@@ -215,6 +245,13 @@ public class MovieProfileFragment extends Fragment {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
+                if (jsonArray.length() == 0 ) {
+                    Log.d(TAG, "JsonArrayList: " + jsonArray.length());
+                    noSimilarMovies.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
+
                 List<MovieModelClass> movieList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -275,6 +312,10 @@ public class MovieProfileFragment extends Fragment {
         }
     }
 
+    private void showNoSimilarMovies() {
+
+    }
+
     private void PutDataIntoRecyclerView(List<MovieModelClass> movieList) {
         Adaptery adaptery = new Adaptery(this.getContext(), movieList);
         //recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -284,6 +325,6 @@ public class MovieProfileFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(adaptery);
-
+        progressBar.setVisibility(View.GONE);
     }
 }
