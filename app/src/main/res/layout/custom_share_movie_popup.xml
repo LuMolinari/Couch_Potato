@@ -17,9 +17,9 @@
         app:srcCompat="@drawable/close_window_512" />
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="105dp"
-        android:layout_height="27dp"
+        android:id="@+id/title_share_moivie_popup"
+        android:layout_width="177dp"
+        android:layout_height="39dp"
         android:text="Share link:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:autoLink="web"
         android:linksClickable="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/title_share_moivie_popup"
         app:layout_constraintTop_toBottomOf="@+id/share_popup_close_button" />
 
     <androidx.appcompat.widget.AppCompatImageButton

@@ -1,10 +1,18 @@
 package com.example.couchpotato;
 
+import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,8 +56,45 @@ public class MyAccountFragment extends Fragment {
             }
         });
 
+        Button recommendButton = v.findViewById(R.id.recommend_button);
+        Dialog dialog = new Dialog(getContext());
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+
+        recommendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.setContentView(R.layout.custom_share_movie_popup);
+                TextView linkTextView = dialog.findViewById(R.id.share_popup_link_text_view);
+                ImageButton closeButton = dialog.findViewById(R.id.share_popup_close_button);
+                ImageButton copyButton = dialog.findViewById(R.id.share_popup_copy_button);
+                TextView title = dialog.findViewById(R.id.title_share_moivie_popup);
+
+                title.setText("Thanks for Sharing");
+                title.setTextSize(15);
+                String link = "https://github.com/LuMolinari/Couch_Potato";
+                linkTextView.setText(link);
+
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                copyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ClipData clip = ClipData.newPlainText("label", link);
+                        clipboard.setPrimaryClip(clip);
+                        Toast.makeText(getContext(), "Copied", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                dialog.show();
+            }
+        });
 
         return v;
     }
