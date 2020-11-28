@@ -1,5 +1,11 @@
 package com.example.couchpotato;
 
+import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +41,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ClipboardManager;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class MovieProfileFragment extends Fragment {
 
     private final MovieSingleton movieSingleton = MovieSingleton.getInstance();
@@ -54,6 +65,11 @@ public class MovieProfileFragment extends Fragment {
 
     private TextView noSimilarMovies;
     private ProgressBar progressBar;
+
+    private ImageButton shareButton;
+    private ClipboardManager clipboard;
+
+    private Dialog dialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +85,12 @@ public class MovieProfileFragment extends Fragment {
 
         noSimilarMovies = v.findViewById(R.id.no_similar_movies_available);
         progressBar = v.findViewById(R.id.similar_movies_progress_bar);
+
+        shareButton = v.findViewById(R.id.shareImageButton);
+
+        dialog = new Dialog(getContext());
+
+        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         databaseManager = new DatabaseManager();
         mAuth = FirebaseAuth.getInstance();
@@ -188,6 +210,43 @@ public class MovieProfileFragment extends Fragment {
                 }
             }
         });
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.setContentView(R.layout.custom_share_movie_popup);
+                TextView linkTextView = dialog.findViewById(R.id.share_popup_link_text_view);
+                ImageButton closeButton = dialog.findViewById(R.id.share_popup_close_button);
+                ImageButton copyButton = dialog.findViewById(R.id.share_popup_copy_button);
+
+                String dateReleased = movieModelClass.getDateReleased();
+                String yearReleased = dateReleased.substring(0, 4);
+                String search = movieModelClass.getTitle().replace(" ", "%20");
+                String link = "https://www.google.com/search?q=" + search + "%20(" + yearReleased + ")";
+
+                linkTextView.setText(link);
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                copyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ClipData clip = ClipData.newPlainText("label", link);
+                        clipboard.setPrimaryClip(clip);
+                        Toast.makeText(getContext(), "Copied", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                dialog.show();
+            }
+        });
+
 
         GetData getData = new GetData();
         getData.execute();

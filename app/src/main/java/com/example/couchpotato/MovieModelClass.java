@@ -9,7 +9,7 @@ public class MovieModelClass {
     private String description;
     private boolean isBookMarked;
     private boolean isFavoriteMovie;
-
+    private String dateReleased;
 
 
     //used in bookmarks item
@@ -101,4 +101,12 @@ public class MovieModelClass {
     public String getReleaseYear() { return releaseYear;  }
 
     public void setReleaseYear(String releaseYear) { this.releaseYear = releaseYear; }
+
+    public String getDateReleased() {
+        return dateReleased;
+    }
+
+    public void setDateReleased(String dateReleased) {
+        this.dateReleased = dateReleased;
+    }
 }
