@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/title_share_moivie_popup"
-        android:layout_width="105dp"
-        android:layout_height="27dp"
+        android:layout_width="177dp"
+        android:layout_height="39dp"
         android:text="Share link:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
