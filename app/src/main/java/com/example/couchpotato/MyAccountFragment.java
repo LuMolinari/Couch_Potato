@@ -19,21 +19,6 @@ public class MyAccountFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.my_account_fragment, container, false);
 
-        //subscription button
-        Button subscriptions = v.findViewById(R.id.subscriptions_button);
-        subscriptions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //switch fragments
-                FragmentTransaction fragmentTransaction = getActivity()
-                        .getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, new streamingSubscriptionsFragment());
-                fragmentTransaction.commit();
-
-
-            }
-        });
-
 
         Button favorites = v.findViewById(R.id.favorites_button);
         favorites.setOnClickListener(new View.OnClickListener() {
