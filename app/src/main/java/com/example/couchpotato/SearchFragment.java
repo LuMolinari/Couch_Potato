@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,7 +240,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     model.setImg2(jsonObject1.getString("backdrop_path"));
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
-
+                    model.setDateReleased(jsonObject1.getString("release_date"));
                     //check if movie is book marked
                     String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
                     int finalI = i;

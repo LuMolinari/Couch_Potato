@@ -220,6 +220,7 @@ public class HomeFragment extends Fragment {
                     model.setImg2(jsonObject1.getString("backdrop_path"));
                     model.setReviewScore(jsonObject1.getString("vote_average"));
                     model.setDescription(jsonObject1.getString("overview"));
+                    model.setDateReleased(jsonObject1.getString("release_date"));
 
                     //check if movie is book marked
                     String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
