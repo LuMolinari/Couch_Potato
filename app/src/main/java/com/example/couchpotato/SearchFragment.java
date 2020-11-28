@@ -23,7 +23,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +30,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +72,9 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
         nextButton = v.findViewById(R.id.next_Button);
         previousButton = v.findViewById(R.id.previous_Button);
 
+        nextButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+        previousButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+
         spinner = v.findViewById(R.id.progress_Bar);
         //spinner.setVisibility(View.VISIBLE);
         currentPage = 1;
@@ -91,8 +92,9 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
             @Override
             public void onClick(View view) {
                 spinner.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
                 currentPage++;
-                pageTextView.setText(String.valueOf(currentPage));
+                //pageTextView.setText(String.valueOf(currentPage) + "/" + totalPages);
                 if (currentPage == totalPages) {
                     nextButton.setEnabled(false);
                 }
@@ -110,8 +112,9 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
             @Override
             public void onClick(View view) {
                 spinner.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
                 currentPage--;
-                pageTextView.setText(String.valueOf(currentPage));
+                //pageTextView.setText(String.valueOf(currentPage) + "/" + totalPages);
                 if (currentPage == 1) {
                     previousButton.setEnabled(false);
                 }
@@ -134,7 +137,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     search = searchField.getText().toString();
                     search = search.replace(" ", "%20");
                     Log.d(TAG, "Search: " + search);
-                    JSON_URL = "https://api.themoviedb.org/3/search/movie?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&query=" + search + "&page=1&include_adult=false";
+                    JSON_URL = "https://api.themoviedb.org/3/search/movie?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&query=" + search + "&page=1&include_adult=false&certification_country=US&certification.lte=G";
                     Log.d(TAG, "JSON URL: " + JSON_URL);
                     getData = new GetData();
                     getData.execute();
@@ -202,9 +205,17 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
 
                 if (currentPage == totalPages) {
                     nextButton.setEnabled(false);
+                    nextButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+                } else {
+                    nextButton.setEnabled(true);
+                    nextButton.setBackgroundResource(R.drawable.square_rounded_512);
                 }
                 if (currentPage == 1) {
                     previousButton.setEnabled(false);
+                    previousButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+                } else {
+                    previousButton.setEnabled(true);
+                    previousButton.setBackgroundResource(R.drawable.square_rounded_512);
                 }
 
                 if (totalPages == 0) {
@@ -214,7 +225,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     getData.cancel(true);
                 } else {
                     //show the results
-                    pageTextView.setText(String.valueOf(currentPage));
+                    pageTextView.setText(String.valueOf(currentPage) + "/" + totalPages);
                     setActionListenersToNextAndPreviousButtons();
                     //getData.execute();
                 }
@@ -295,6 +306,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(adaptery);
+        recyclerView.setVisibility(View.VISIBLE);
         spinner.setVisibility(View.GONE);
     }
 

@@ -43,31 +43,31 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="369dp"
-        android:layout_height="540dp"
+        android:layout_width="368dp"
+        android:layout_height="526dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/square_rounded_512_dark"
         android:text="Next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/previousButton"
@@ -75,10 +75,11 @@
         android:layout_height="40dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/square_rounded_512_dark"
         android:text="Previous"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -95,13 +96,12 @@
         android:id="@+id/pageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="28dp"
         android:text="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview"
-        app:layout_constraintVertical_bias="0.306" />
+        app:layout_constraintTop_toTopOf="@+id/nextButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

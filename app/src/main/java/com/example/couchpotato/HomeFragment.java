@@ -83,6 +83,9 @@ public class HomeFragment extends Fragment {
         nextButton = v.findViewById(R.id.nextButton);
         previousButton = v.findViewById(R.id.previousButton);
 
+        nextButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+        previousButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+
         spinner = v.findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
         currentPage = 1;
@@ -105,10 +108,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 spinner.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
                 currentPage++;
                 pageTextView.setText(String.valueOf(currentPage));
                 if (currentPage == totalPages) {
                     nextButton.setEnabled(false);
+                    nextButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
                 }
                 JSON_URL = "https://api.themoviedb.org/3/discover/" +
                         "movie?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&sort_by" +
@@ -127,10 +132,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 spinner.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
                 currentPage--;
                 pageTextView.setText(String.valueOf(currentPage));
                 if (currentPage == 1) {
                     previousButton.setEnabled(false);
+                    previousButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
                 }
                 JSON_URL = "https://api.themoviedb.org/3/discover/" +
                         "movie?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&sort_by" +
@@ -208,6 +215,23 @@ public class HomeFragment extends Fragment {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
+                totalPages = jsonObject.getInt("total_pages");
+
+                if (currentPage == totalPages) {
+                    nextButton.setEnabled(false);
+                    nextButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+                } else {
+                    nextButton.setEnabled(true);
+                    nextButton.setBackgroundResource(R.drawable.square_rounded_512);
+                }
+                if (currentPage == 1) {
+                    previousButton.setEnabled(false);
+                    previousButton.setBackgroundResource(R.drawable.square_rounded_512_dark);
+                } else {
+                    previousButton.setEnabled(true);
+                    previousButton.setBackgroundResource(R.drawable.square_rounded_512);
+                }
+
                 List<MovieModelClass> movieList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -277,7 +301,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(adaptery);
-        spinner.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.INVISIBLE);
     }
 
 
