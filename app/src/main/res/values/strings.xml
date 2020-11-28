@@ -21,6 +21,7 @@
     <string name="account_settings">Account Settings</string>
     <string name="recommend">Recommend</string>
     <string name="change_password">Change Password</string>
+    <string name="new_Email">New Email...</string>
     <string name="new_password">New Password...</string>
     <string name="new_name">New Name...</string>
     <string name="edit_name">Change Name</string>
