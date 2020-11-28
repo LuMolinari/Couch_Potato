@@ -219,12 +219,21 @@ public class MovieProfileFragment extends Fragment {
                 ImageButton closeButton = dialog.findViewById(R.id.share_popup_close_button);
                 ImageButton copyButton = dialog.findViewById(R.id.share_popup_copy_button);
 
-                String dateReleased = movieModelClass.getDateReleased();
-                String yearReleased = dateReleased.substring(0, 4);
                 String search = movieModelClass.getTitle().replace(" ", "%20");
-                String link = "https://www.google.com/search?q=" + search + "%20(" + yearReleased + ")";
+                String link;
+                String dateReleased = movieModelClass.getDateReleased();
+                if (dateReleased.equals("")) {
+                    link = "https://www.google.com/search?q=" + search;
 
-                linkTextView.setText(link);
+                    linkTextView.setText(link);
+                } else {
+                    String yearReleased = dateReleased.substring(0, 4);
+
+                    link = "https://www.google.com/search?q=" + search + "%20(" + yearReleased + ")";
+
+                    linkTextView.setText(link);
+                }
+
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
