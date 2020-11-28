@@ -21,11 +21,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MyAccountFragment extends Fragment {
 
-    private Button recommendButton;
-    private ClipboardManager clipboard;
-
-    private Dialog dialog;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,9 +57,9 @@ public class MyAccountFragment extends Fragment {
         });
 
 
-        recommendButton = v.findViewById(R.id.recommend_button);
-        dialog = new Dialog(getContext());
-        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        Button recommendButton = v.findViewById(R.id.recommend_button);
+        Dialog dialog = new Dialog(getContext());
+        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 
         recommendButton.setOnClickListener(new View.OnClickListener() {
             @Override
