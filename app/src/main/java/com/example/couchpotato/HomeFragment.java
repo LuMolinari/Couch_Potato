@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null).commit();
             }
 
+
         });
 
 

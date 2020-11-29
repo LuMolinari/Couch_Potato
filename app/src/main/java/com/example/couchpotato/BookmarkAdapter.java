@@ -14,26 +14,15 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder>{
+public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder> {
 
     private final ArrayList<BookmarkItem> mBookmarkItems;
     private Context mContext;
-    public BookmarkAdapter(ArrayList<BookmarkItem> bookmarkItems){
+    private final ItemListener mitemListener;
+
+    public BookmarkAdapter(ArrayList<BookmarkItem> bookmarkItems, ItemListener itemListener) {
         mBookmarkItems = bookmarkItems;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView moviePoster;
-        public TextView movieTitle, releaseYear, reviewScore;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            moviePoster = itemView.findViewById(R.id.img_moviePoster);
-            movieTitle = itemView.findViewById(R.id.tv_movieTitle);
-            releaseYear = itemView.findViewById(R.id.tv_releaseYear);
-            reviewScore = itemView.findViewById(R.id.tv_reviewScore);
-
-        }
+        this.mitemListener= itemListener;
     }
 
     @NonNull
@@ -41,7 +30,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_bookmark, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, mitemListener);
         mContext = parent.getContext();
         return viewHolder;
     }
@@ -61,6 +50,23 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         holder.movieTitle.setText(currentItem.getMovieTitle());
         holder.releaseYear.setText(currentItem.getReleaseYear());
         holder.reviewScore.setText(currentItem.getReviewScore());
+
+        if (currentItem.isBookMarked()){
+            holder.bookmarkButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24);
+        }
+        if (currentItem.isFavoriteMovie()){
+            holder.favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_red_24) ;
+        }
+
+
+    }
+
+//
+    public interface ItemListener{
+        void  onItemCLicked(int position);
+        void favoriteClicked(int position);
+        void bookmarkClicked(int position);
+
     }
 
     @Override
@@ -68,4 +74,46 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         return mBookmarkItems.size();
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ImageView moviePoster;
+        public TextView movieTitle, releaseYear, reviewScore;
+        ItemListener itemListener;
+        ImageView favoriteButton;
+        ImageView bookmarkButton;
+
+        public ViewHolder(@NonNull View itemView, ItemListener itemListener) {
+            super(itemView);
+            moviePoster = itemView.findViewById(R.id.img_moviePoster);
+            movieTitle = itemView.findViewById(R.id.tv_movieTitle);
+            releaseYear = itemView.findViewById(R.id.tv_releaseYear);
+            reviewScore = itemView.findViewById(R.id.tv_reviewScore);
+            this.itemListener = itemListener;
+
+
+
+            //instantiate other buttons
+            favoriteButton = itemView.findViewById(R.id.img_like);
+            bookmarkButton = itemView.findViewById(R.id.img_bookmark);
+
+
+
+
+            //link them to on click listener
+            itemView.setOnClickListener(this);
+            favoriteButton.setOnClickListener(this);
+            bookmarkButton.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.img_like){
+                itemListener.favoriteClicked(getAdapterPosition());
+            } else if(view.getId() == R.id.img_bookmark) {
+                itemListener.bookmarkClicked(getAdapterPosition());
+            } else {
+                itemListener.onItemCLicked(getAdapterPosition());
+            }
+        }
+    }
 }

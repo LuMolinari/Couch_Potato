@@ -71,7 +71,7 @@ public class MyAccountFragment extends Fragment {
                 ImageButton copyButton = dialog.findViewById(R.id.share_popup_copy_button);
                 TextView title = dialog.findViewById(R.id.title_share_moivie_popup);
 
-                title.setText("Thanks for Sharing");
+                title.setText(R.string.thx);
                 title.setTextSize(15);
                 String link = "https://github.com/LuMolinari/Couch_Potato";
                 linkTextView.setText(link);

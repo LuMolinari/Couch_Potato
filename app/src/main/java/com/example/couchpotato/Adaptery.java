@@ -1,13 +1,11 @@
 package com.example.couchpotato;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +18,13 @@ import java.util.List;
 
 public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private static List<MovieModelClass> mData;
+
 
     public Adaptery(Context mContext, List<MovieModelClass> mData) {
         this.mContext = mContext;
-        this.mData = mData;
+        Adaptery.mData = mData;
     }
 
     @NonNull
@@ -80,7 +79,10 @@ public class Adaptery extends RecyclerView.Adapter<Adaptery.MyViewHolder> {
                     movieSingleton.setMovieModelClass((MovieModelClass)mData.get(position));
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     Fragment myFragment = new MovieProfileFragment();
+
+
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).commit();
+
 
 
                 }

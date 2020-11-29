@@ -1,6 +1,5 @@
 package com.example.couchpotato;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,16 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,18 +36,24 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends Fragment implements BookmarkAdapter.ItemListener {
 
     ImageView btn_back;
     RecyclerView recyclerView;
     private DatabaseManager databaseManager;
     private FirebaseAuth mAuth;
-    private final ArrayList<String> movieId = new ArrayList<>();
     private final ArrayList<BookmarkItem> favoritesList = new ArrayList<>();
-    ProgressDialog pd;
+    private final ArrayList<MovieModelClass> movieModels = new ArrayList<>();
+    MovieSingleton movieSingleton = MovieSingleton.getInstance();
     private String JSON_URL;
     int favoriteTotal;
+    View passable;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    boolean isBookmarked = false;
+    boolean isFavorite = true;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -83,6 +95,7 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
+        passable = v;
         return v;
 
     }
@@ -90,7 +103,7 @@ public class FavoritesFragment extends Fragment {
 
 
     private void PutDataIntoRecyclerView(ArrayList<BookmarkItem> favoritesList) {
-        BookmarkAdapter bookmarkAdapter = new BookmarkAdapter(favoritesList);
+        BookmarkAdapter bookmarkAdapter = new BookmarkAdapter(favoritesList,this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getContext(), 1);
 
@@ -98,6 +111,97 @@ public class FavoritesFragment extends Fragment {
 
         recyclerView.setAdapter(bookmarkAdapter);
 
+    }
+
+    //these methods will handle my click events
+    @Override
+    public void onItemCLicked(int position) {
+        String id = movieModels.get(position).getId();
+        movieSingleton.setMovieId(id);
+        movieSingleton.setMovieModelClass((MovieModelClass)movieModels.get(position));
+        AppCompatActivity activity = (AppCompatActivity) passable.getContext();
+        Fragment myFragment = new MovieProfileFragment();
+
+
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).commit();
+    }
+
+    @Override
+    public void favoriteClicked(int position) {
+        //if theyre in favorites view and click the favorites button they remove it from favorites
+
+        String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+        String documentName = "FavoriteMovies";
+
+        DocumentReference documentReference = db.document(collectionPath + "/" + documentName);
+        HashMap<String, Object> data = new HashMap<>();
+        data.put(movieModels.get(position).getTitle(), FieldValue.delete());
+        documentReference.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("Favorites Fragment", "Successfully deleted the field");
+
+                Toast.makeText(getContext(), favoritesList.get(position).getMovieTitle() + " removed from favorites", Toast.LENGTH_SHORT).show();
+                favoritesList.remove(position);
+                PutDataIntoRecyclerView(favoritesList);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("FavoritesFragment", "Failed to delete the field");
+            }
+        });
+
+    }
+
+    @Override
+    public void bookmarkClicked(int position) {
+        String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
+        String documentName = "BookmarkedMovies";
+        if (movieModels.get(position).getBookMarked()) {
+            DocumentReference documentReference = db.document(collectionPath + "/" + documentName);
+            HashMap<String, Object> data = new HashMap<>();
+            data.put(movieModels.get(position).getTitle(), FieldValue.delete());
+            documentReference.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("Favorites Fragment", "Successfully deleted the field");
+                    movieModels.get(position).setBookMarked(false);
+                    favoritesList.get(position).setBookMarked(false);
+                    Toast.makeText(getContext(), favoritesList.get(position).getMovieTitle() + " removed from Bookmarks", Toast.LENGTH_SHORT).show();
+
+                    PutDataIntoRecyclerView(favoritesList);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("FavoritesFragment", "Failed to delete the field");
+                }
+            });
+        } else {
+            databaseManager.checkIfThisDocumentExists(collectionPath + "/" + documentName, new FirebaseCallback() {
+                @Override
+                public void callBack(Object status) {
+                    Boolean documentExists = (Boolean) status;
+                    if (documentExists) {
+                        databaseManager.createNewField(collectionPath, documentName, movieModels.get(position).getTitle(), movieModels.get(position).getId());
+                    } else {
+                        databaseManager.createDocument(collectionPath, documentName, movieModels.get(position).getTitle(), movieModels.get(position).getId());
+                    }
+
+                    movieModels.get(position).setBookMarked(true);
+                    favoritesList.get(position).setBookMarked(true);
+
+                    Toast.makeText(getContext(), favoritesList.get(position).getMovieTitle() + " added to bookmarks", Toast.LENGTH_SHORT).show();
+
+                    PutDataIntoRecyclerView(favoritesList);
+
+
+                }
+            });
+        }
     }
 
 
@@ -164,27 +268,67 @@ public class FavoritesFragment extends Fragment {
             try {
                 JSONObject jObject = new JSONObject(result);
 
-         //       BookmarkItem (int moviePoster, String movieTitle, String releaseYear, String reviewScore)
-//                model.setId(jsonObject1.getString("id"));
-//                model.setTitle(jsonObject1.getString("title"));
-//                model.setImg(jsonObject1.getString("poster_path"));
-//                model.setImg2(jsonObject1.getString("backdrop_path"));
-//                model.setReviewScore(jsonObject1.getString("vote_average"));
-//                model.setDescription(jsonObject1.getString("overview"));
+                MovieModelClass model = new MovieModelClass();
+
+                model.setId(jObject.getString("id"));
+                model.setTitle(jObject.getString("title"));
+                model.setImg(jObject.getString("poster_path"));
+                model.setImg2(jObject.getString("backdrop_path"));
+                model.setReviewScore(jObject.getString("vote_average"));
+                model.setDescription(jObject.getString("overview"));
+                model.setDateReleased(jObject.getString("release_date"));
+//
+
                 System.out.println("Poster: "+jObject.getString("poster_path"));
                 System.out.println("Title: "+jObject.getString("title"));
                 System.out.println("release: "+jObject.getString("release_date"));
                 System.out.println("score: "+jObject.getString("poster_path"));
 
-                BookmarkItem item = new BookmarkItem(jObject.getString("poster_path"),
-                        jObject.getString("title"),jObject.getString("release_date"),jObject.getString("vote_average"));
 
-                favoritesList.add(item);
+                //check if movie is bookmarked
+                String documentPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies/BookmarkedMovies";
 
-                //when we have received all asynchronous json data then fill the view.
-                if (favoritesList.size() == favoriteTotal){
-                    PutDataIntoRecyclerView(favoritesList);
-                }
+
+
+
+                databaseManager.getDocumentSnapshot(documentPath, new FirebaseCallback() {
+                    @Override
+                    public void callBack(Object status) {
+                        DocumentSnapshot snapshot = (DocumentSnapshot) status;
+                        for (Object ds : snapshot.getData().values()) {
+                            if (ds.toString().equals(model.getId())) {
+                                isBookmarked = true;
+                                break;
+                            } else {
+                                isBookmarked = false;
+                            }
+                        }
+                        BookmarkItem item = null;
+                        try {
+                            item = new BookmarkItem(jObject.getString("poster_path"),
+                                    jObject.getString("title"),jObject.getString("release_date"),jObject.getString("vote_average"),isBookmarked,isFavorite);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        model.setBookMarked(isBookmarked);
+                        model.setFavoriteMovie(isFavorite);
+
+                        favoritesList.add(item);
+                        movieModels.add(model);
+
+
+                        //when we have received all asynchronous json data then fill the view.
+                        if (favoritesList.size() == favoriteTotal){
+                            PutDataIntoRecyclerView(favoritesList);
+                        }
+
+                    }
+                });
+
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
