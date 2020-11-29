@@ -68,12 +68,7 @@ public class HomeFragment extends Fragment {
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new MyAccountFragment());
                 fragmentTransaction.commit();
-
-
             }
-
-
-
         });
 
 

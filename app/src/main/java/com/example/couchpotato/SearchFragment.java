@@ -54,7 +54,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
     private FirebaseAuth mAuth;
 
     private String search;
-    private String TAG = "Search Fragment";
+    private final String TAG = "Search Fragment";
 
 
     @Nullable
@@ -145,6 +145,9 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                 return false;
             }
         });
+
+        //add back button functionality
+
         return v;
 
     }
@@ -225,7 +228,7 @@ public class SearchFragment extends androidx.fragment.app.Fragment {
                     getData.cancel(true);
                 } else {
                     //show the results
-                    pageTextView.setText(String.valueOf(currentPage) + "/" + totalPages);
+                    pageTextView.setText(currentPage + "/" + totalPages);
                     setActionListenersToNextAndPreviousButtons();
                     //getData.execute();
                 }
