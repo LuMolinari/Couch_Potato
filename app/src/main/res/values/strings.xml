@@ -33,6 +33,7 @@
     <string name="search">Search</string>
     <string name="home">Home</string>
     <string name="bookmarks">Bookmarks</string>
+    <string name="logout">Logout</string>
     <string name="thx">Thanks for Sharing!</string>
 
 </resources>

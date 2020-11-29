@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -139,8 +141,6 @@ public class MovieProfileFragment extends Fragment {
                     .load("https://image.tmdb.org/t/p/w500" + movieModelClass.getImg2())
                     .into(moviePic);
         }
-
-
 
         similarMoviesUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/similar?api_key=4517228c3cc695f9dfa1dcb4c4979152&language=en-US&page=1";
 

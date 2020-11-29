@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MyAccountFragment extends Fragment {
 
@@ -36,9 +40,7 @@ public class MyAccountFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity()
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new FavoritesFragment());
-                fragmentTransaction.commit();
-
-
+                fragmentTransaction.addToBackStack(null).commit();
             }
         });
 
@@ -50,7 +52,7 @@ public class MyAccountFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity()
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, new AccountSettingsFragment());
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
 
 
             }
@@ -90,9 +92,21 @@ public class MyAccountFragment extends Fragment {
                     }
                 });
 
-
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 dialog.show();
+            }
+        });
+
+        Button logoutButton = v.findViewById(R.id.logoutBtn);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("LOGOUT", "button pressed");
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finish();
             }
         });
 
