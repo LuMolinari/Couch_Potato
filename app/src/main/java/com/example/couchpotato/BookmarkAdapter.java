@@ -67,6 +67,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         void favoriteClicked(int position);
         void bookmarkClicked(int position);
 
+    void shareClicked(int position);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         ItemListener itemListener;
         ImageView favoriteButton;
         ImageView bookmarkButton;
+        ImageView shareButton;
 
         public ViewHolder(@NonNull View itemView, ItemListener itemListener) {
             super(itemView);
@@ -94,7 +96,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
             //instantiate other buttons
             favoriteButton = itemView.findViewById(R.id.img_like);
             bookmarkButton = itemView.findViewById(R.id.img_bookmark);
-
+            shareButton = itemView.findViewById(R.id.img_share);
 
 
 
@@ -102,6 +104,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
             itemView.setOnClickListener(this);
             favoriteButton.setOnClickListener(this);
             bookmarkButton.setOnClickListener(this);
+            shareButton.setOnClickListener(this);
 
         }
 
@@ -109,8 +112,10 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         public void onClick(View view) {
             if (view.getId() == R.id.img_like){
                 itemListener.favoriteClicked(getAdapterPosition());
-            } else if(view.getId() == R.id.img_bookmark) {
+            } else if (view.getId() == R.id.img_bookmark) {
                 itemListener.bookmarkClicked(getAdapterPosition());
+            } else if (view.getId() == R.id.img_share) {
+                itemListener.shareClicked(getAdapterPosition());
             } else {
                 itemListener.onItemCLicked(getAdapterPosition());
             }

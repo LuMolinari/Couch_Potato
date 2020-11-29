@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -42,11 +39,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.content.ClipboardManager;
-
-import static android.content.Context.CLIPBOARD_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class MovieProfileFragment extends Fragment {
 
@@ -101,11 +93,11 @@ public class MovieProfileFragment extends Fragment {
         MovieModelClass movieModelClass = movieSingleton.getMovieModelClass();
 
         if (movieModelClass.getBookMarked()) {
-            bookmarkImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+            bookmarkImageButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24);
         }
 
         if (movieModelClass.getFavoriteMovie()) {
-            favoriteImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+            favoriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_red_24);
         }
 
         Log.d("MovieProfileFrag", " Title: " + movieModelClass.getTitle());
@@ -153,7 +145,7 @@ public class MovieProfileFragment extends Fragment {
                     String documentName = "BookmarkedMovies";
                     databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
                     Toast.makeText(getContext(), "Bookmark removed", Toast.LENGTH_SHORT).show();
-                    bookmarkImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
+                    bookmarkImageButton.setImageResource(R.drawable.ic_baseline_bookmark_border_24);
                     movieModelClass.setBookMarked(false);
                 } else {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
@@ -168,7 +160,7 @@ public class MovieProfileFragment extends Fragment {
                             } else {
                                 databaseManager.createDocument(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
                             }
-                            bookmarkImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+                            bookmarkImageButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24);
                             movieModelClass.setBookMarked(true);
                             Toast.makeText(getContext(), "Bookmark saved", Toast.LENGTH_SHORT).show();
                         }
@@ -185,7 +177,7 @@ public class MovieProfileFragment extends Fragment {
                     String documentName = "FavoriteMovies";
                     databaseManager.deleteField(collectionPath + "/" + documentName, movieModelClass.getTitle());
                     Toast.makeText(getContext(), "Favorite removed", Toast.LENGTH_SHORT).show();
-                    favoriteImageButton.setBackground(getResources().getDrawable(R.drawable.text_input_bubble));
+                    favoriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     movieModelClass.setFavoriteMovie(false);
                 } else {
                     String collectionPath = "users/" + mAuth.getCurrentUser().getUid() + "/Movies";
@@ -200,7 +192,7 @@ public class MovieProfileFragment extends Fragment {
                             } else {
                                 databaseManager.createDocument(collectionPath, documentName, movieModelClass.getTitle(), movieModelClass.getId());
                             }
-                            favoriteImageButton.setBackground(getResources().getDrawable(android.R.drawable.ic_notification_overlay));
+                            favoriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_red_24);
                             movieModelClass.setFavoriteMovie(true);
                             Toast.makeText(getContext(), "Bookmark saved", Toast.LENGTH_SHORT).show();
                         }

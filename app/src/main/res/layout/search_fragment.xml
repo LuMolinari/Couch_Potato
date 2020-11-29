@@ -12,7 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="621dp" />
+        app:layout_constraintGuide_percent="0.89" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
     <EditText
         android:id="@+id/searchField"
@@ -20,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/text_input_bubble"
         android:backgroundTint="@color/colorPrimaryDark"
         android:ems="15"
@@ -29,6 +37,7 @@
         android:paddingBottom="5dp"
         android:textColor="@color/hintTextColor"
         android:textColorHint="@color/hintTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/resultsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,28 +46,26 @@
         android:id="@+id/next_Button"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginRight="90dp"
-        android:layout_marginBottom="28dp"
         android:background="@drawable/square_rounded_512_dark"
         android:text="Next"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/page_TextView"
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/previous_Button"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginLeft="90dp"
-        android:layout_marginBottom="28dp"
         android:background="@drawable/square_rounded_512_dark"
         android:text="Previous"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/page_TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
 
     <ProgressBar
@@ -77,24 +84,22 @@
         android:id="@+id/resultsRecyclerView"
         android:layout_width="368dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/next_Button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchField"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <TextView
         android:id="@+id/page_TextView"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
         android:text="1"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/next_Button"
-        app:layout_constraintStart_toStartOf="@+id/previous_Button" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <TextView
         android:id="@+id/no_results_text_view"
