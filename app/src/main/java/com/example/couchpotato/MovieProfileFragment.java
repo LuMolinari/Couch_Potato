@@ -194,7 +194,7 @@ public class MovieProfileFragment extends Fragment {
                             }
                             favoriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_red_24);
                             movieModelClass.setFavoriteMovie(true);
-                            Toast.makeText(getContext(), "Bookmark saved", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Favorite saved", Toast.LENGTH_SHORT).show();
                         }
                     });
 
