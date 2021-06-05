@@ -13,18 +13,18 @@ Couch potato is a Android Application which allows users to get useful movie inf
 
 ### Screenshots
 _Sign In/Sign Up_
-![](/misc/mg/sign-in.png)![](/misc/mg/sign-up.png)
+![](/misc/img/sign-in.png)![](/misc/img/sign-up.png)
 
 _Home_
-![](/misc/mg/home.png)
+![](/misc/img/home.png)
 
 _Search_
-![](/misc/mg/search.png)
+![](/misc/img/search.png)
 
 _Movie Profile_
-![](/misc/mg/movie.png)
+![](/misc/img/movie.png)
 
 _Bookmarks_
-![](/misc/mg/bookmarks.png)
+![](/misc/img/bookmarks.png)
 
 
